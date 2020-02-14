@@ -1,0 +1,9 @@
+BEGIN TRANSACTION;
+CREATE TABLE "FILES" (
+	"Path"	TEXT NOT NULL,
+	"Title"	INTEGER NOT NULL,
+	"Album"	INTEGER NOT NULL,
+	"Artist"	INTEGER NOT NULL,
+	PRIMARY KEY("Path","Title","Album","Artist")
+);
+COMMIT;
