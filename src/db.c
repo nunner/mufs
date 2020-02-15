@@ -136,3 +136,27 @@ insert_file(file_t *file)
 
     sqlite3_finalize(stmt);
 }
+
+void
+begin_transaction() {
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(data->db, "BEGIN TRANSACTION;", -1, &stmt, NULL);
+     
+    if((rc = sqlite3_step(stmt)) != SQLITE_DONE) {
+        printf("Couldn't begin transaction: %s\n", sqlite3_errmsg(data->db));
+    }
+
+    sqlite3_finalize(stmt);
+}
+
+void
+commit_transaction() {
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(data->db, "COMMIT;", -1, &stmt, NULL);
+     
+    if((rc = sqlite3_step(stmt)) != SQLITE_DONE) {
+        printf("Couldn't commit transaction: %s\n", sqlite3_errmsg(data->db));
+    }
+
+    sqlite3_finalize(stmt);
+}

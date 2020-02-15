@@ -28,4 +28,10 @@ resolve_title(char *artist, char *album, char *title);
 char *
 rename_file(tags_t *old, tags_t *new);
 
+void
+begin_transaction();
+
+void
+commit_transaction();
+
 #endif //MUFS_DB_H

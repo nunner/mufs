@@ -60,6 +60,8 @@ void
 index_files(const char *path)
 {
     int ret = 0;
+    begin_transaction();
     if((ret = nftw(path, &store_file, FD_NUM, 0)) != 0)
         exit(ret);
+    commit_transaction();
 }
