@@ -56,12 +56,7 @@ store_file(const char *fpath, const struct stat *sb,
 {
     if(tflag == FTW_F || tflag == FTW_SL) {
         file_t *file = get_tags(fpath);
-        // TODO Properly handle files with incomplete tags
-        if(file->path != NULL &&
-            strlen(file->tags->artist) > 0 &&
-            strlen(file->tags->album) > 0 &&
-            strlen(file->tags->title) > 0
-        )
+        if(file->path != NULL)
             insert_file(file);
     }
     return 0;
