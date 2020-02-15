@@ -43,7 +43,7 @@ get_tags_from_path(const char *path)
 {
     char *fpath = NULL;
     tags_t *tags = malloc(sizeof(tags_t));
-    asprintf(&fpath, path);
+    asprintf(&fpath, "%s", path);
 
     tags->artist = strtok(fpath, "/");
     tags->album = strtok(NULL, "/");
@@ -138,7 +138,7 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 
     int i = level(path);
     char *fpath = NULL;
-    asprintf(&fpath, path);
+    asprintf(&fpath, "%s", path);
 
     if(strcmp(path, "/") == 0) {
         get_artists(sqliteData);
