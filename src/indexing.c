@@ -11,6 +11,7 @@
 #include <taglib/tag_c.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "indexing.h"
 #include "mufs.h"
@@ -44,7 +45,12 @@ store_file(const char *fpath, const struct stat *sb,
 {
     if(tflag == FTW_F || tflag == FTW_SL) {
         file_t *file = get_tags(fpath);
-        if(file->path != NULL)
+        // TODO Properly handle files with incomplete tags
+        if(file->path != NULL &&
+            strlen(file->tags->artist) > 0 &&
+            strlen(file->tags->album) > 0 &&
+            strlen(file->tags->title) > 0
+        )
             insert_file(file);
     }
     return 0;
