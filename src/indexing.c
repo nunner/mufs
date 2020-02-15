@@ -19,6 +19,11 @@
 
 static char *untagged = "Untagged";
 
+/**
+ * Read the tags from a physical file. If the file is
+ * invalid, they are discarded. If single tags are not set,
+ * they are replaced with "Untagged".
+ */
 file_t *
 get_tags(const char *fpath)
 {
@@ -31,6 +36,7 @@ get_tags(const char *fpath)
         TagLib_Tag *tag = taglib_file_tag(tfile);
 
         file->path = fpath;
+
         file->tags->artist = taglib_tag_artist(tag);
         if (strlen(file->tags->artist) == 0)
             file->tags->artist = untagged;
@@ -43,13 +49,16 @@ get_tags(const char *fpath)
         if (strlen(file->tags->title) == 0)
             file->tags->artist = basename(fpath);
 
-
         taglib_file_free(tfile);
     }
 
     return file;
 }
 
+/**
+ * Store a file in the database. This is only done
+ * if the file has its path set.
+ */
 static int
 store_file(const char *fpath, const struct stat *sb,
              int tflag, struct FTW *ftwbuf)
@@ -62,6 +71,10 @@ store_file(const char *fpath, const struct stat *sb,
     return 0;
 }
 
+/**
+ * Loop through all files in the root directory, parsing
+ * the tags for each single one.
+ */
 void
 index_files(const char *path)
 {

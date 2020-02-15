@@ -37,6 +37,9 @@ open_conn()
     wordfree(&exp_result);
 }
 
+/**
+ * Get all individual artists from the database.
+ */
 void
 get_artists(mufs_sqlite_data *mufs_data)
 {
@@ -48,6 +51,9 @@ get_artists(mufs_sqlite_data *mufs_data)
     sqlite3_free(err);
 }
 
+/**
+ * Get all individual albums from a specific artist.
+ */
 void
 get_albums(mufs_sqlite_data *mufs_data, char *artist)
 {
@@ -60,6 +66,9 @@ get_albums(mufs_sqlite_data *mufs_data, char *artist)
     sqlite3_free(err);
 }
 
+/**
+ * Get all individual titles from a specific artist in a specific album.
+ */
 void
 get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album)
 {
@@ -72,6 +81,10 @@ get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album)
     sqlite3_free(err);
 }
 
+/**
+ * Get the physical file path from a file by giving the artist,
+ * album and title tags.
+ */
 char *
 resolve_title(char *artist, char *album, char *title)
 {
@@ -91,6 +104,10 @@ resolve_title(char *artist, char *album, char *title)
     return ret;
 }
 
+/**
+ * Change all the tags from a specific file in the database. The
+ * lookup is done by using the path from resolve_title().
+ */
 char *
 rename_file(tags_t *old, tags_t *new)
 {
@@ -116,9 +133,7 @@ rename_file(tags_t *old, tags_t *new)
 /**
  * Insert a file object into the database. This is used when indexing
  * the mounted folder, so that values can be retrieved later easily.
- * @param file
  */
-
 void
 insert_file(file_t *file)
 {
@@ -137,12 +152,17 @@ insert_file(file_t *file)
     sqlite3_finalize(stmt);
 }
 
+/**
+ * Begin and start a transaction. This is done for tremendously
+ * speeding up the indexing process.
+ */
+
 void
 begin_transaction() {
     char* errmsg;
     sqlite3_exec(data->db, "BEGIN TRANSACTION;", NULL, NULL, &errmsg);
 
-    if(errmsg != NULL) { 
+    if(errmsg != NULL) {
         printf("Couldn't begin transaction: %s\n", errmsg);
         sqlite3_free(errmsg);
     }
@@ -153,7 +173,7 @@ commit_transaction() {
     char* errmsg;
     sqlite3_exec(data->db, "COMMIT;", NULL, NULL, &errmsg);
 
-    if(errmsg != NULL) { 
+    if(errmsg != NULL) {
         printf("Couldn't commit transaction: %s\n", errmsg);
         sqlite3_free(errmsg);
     }

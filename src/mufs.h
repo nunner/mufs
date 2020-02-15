@@ -38,15 +38,6 @@ typedef struct {
     fuse_fill_dir_t filler;
 } mufs_sqlite_data;
 
-/**
- * The callback which is passed to the SQLITE query.
- * @param data
- * @param argc
- * @param argv
- * @param azColName
- * @return
- */
-
 int
 mufs_fill_callback(void* data, int argc, char** argv, char** azColName);
 

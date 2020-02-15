@@ -23,21 +23,8 @@
 struct mufs_data *data;
 
 /**
- * Translate a FUSE path into a physical path
- * @param path
- * @return
+ * Fill a tags_t object from a given path.
  */
-char *
-translate_path(const char *path)
-{
-    char *ret = (char *) malloc(sizeof(char) * (strlen(path) + strlen(data->rootdir) + 1));
-
-    strcpy(ret, data->rootdir);
-    strcat(ret, path);
-
-    return ret;
-}
-
 tags_t *
 get_tags_from_path(const char *path)
 {
@@ -53,9 +40,8 @@ get_tags_from_path(const char *path)
 }
 
 /**
- * Calculate at which level the given path is
- * @param path
- * @return
+ * Calculate at which level the given path is. This is used for determining
+ * whether a file is an Artist, Album or Title.
  */
 int
 level(const char *path)
@@ -66,6 +52,12 @@ level(const char *path)
     return i;
 }
 
+/**
+ * When calling a sqlite prepared select, you have to give a callback.
+ * This function takes the data provided by the SELECT and fills the
+ * buffer provided by FUSE with it. It is used for all levels of the
+ * readdir() function.
+ */
 int
 mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)
 {
@@ -80,7 +72,7 @@ mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)
 
 
 /**
- * Print the usage of the program, with the correct number of parameters
+ * Print the usage of the program.
  */
 void
 mufs_usage()
@@ -89,6 +81,9 @@ mufs_usage()
     exit(1);
 }
 
+/**
+ * Initialize the file system, set config parameters.
+ */
 static void *
 mufs_init(struct fuse_conn_info *conn,
           struct fuse_config *cfg)
@@ -102,6 +97,16 @@ mufs_init(struct fuse_conn_info *conn,
     return NULL;
 }
 
+/**
+ * Read attributes from a file. The value returned is based
+ * on the level in the file system itself.
+ *      Level 0 -> Artist
+ *      Level 1 -> Album
+ *      Level 2 -> Title
+ * Artists and Albums are marked as Folders, Titles are marked
+ * as symlinks to their respective files on the physical file
+ * system.
+ */
 static int
 mufs_getattr (const char *path, struct stat *stbuf,
               struct fuse_file_info *fi)
@@ -123,6 +128,15 @@ mufs_getattr (const char *path, struct stat *stbuf,
     return 0;
 }
 
+/**
+ * Read the contents of a directory. We fill our custom sqliteData
+ * object with pointers to the buffer and the filler function.
+ *
+ * Based on the level in the file system, different SQL statements
+ * are executed, and their contents are piped to mufs_fill_callback()
+ *
+ * At the end, . and .. are added to the buffer.
+ */
 static int
 mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
              off_t offset, struct fuse_file_info *fi,
@@ -137,6 +151,7 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     sqliteData->filler = filler;
 
     int i = level(path);
+    // This is done as to not invalidate the const qualifier
     char *fpath = NULL;
     asprintf(&fpath, "%s", path);
 
@@ -157,6 +172,11 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     return 0;
 }
 
+/**
+ * Read a symlink on the disk. This is used for actually playing
+ * and resolving the music files. The path is retrieved from the
+ * database and put into te buffer.
+ */
 static int
 mufs_readlink(const char *path, char *buf, size_t size)
 {
@@ -170,38 +190,13 @@ mufs_readlink(const char *path, char *buf, size_t size)
     return 0;
 }
 
-static int
-mufs_open(const char *path, struct fuse_file_info *finfo)
-{
-    int res;
-    char *fpath = translate_path(path);
-
-    if((res = open(fpath, finfo->flags)) == -1)
-        return -errno;
-
-    close(res);
-    free(fpath);
-    return 0;
-}
-
-static int
-mufs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *finfo)
-{
-    int fd;
-    char *fpath = translate_path(path);
-    (void) finfo;
-
-    if((fd = open(fpath, O_RDONLY)) == -1)
-        return -errno;
-
-    if(pread(fd, buf, size, offset) == -1)
-        return -errno;
-
-    close(fd);
-    free(fpath);
-    return 0;
-}
-
+/**
+ * In mufs, renaming and moving files changes their tags.
+ * The old tags are read from the current path, the new tags
+ * are read from the path where the file is moved to, using
+ * get_tags_from_path(), respectively. The file is renamed using
+ * the rename_file() function, defined in db.h.
+ */
 static int
 mufs_rename(const char *from, const char *to, unsigned int flags)
 {
@@ -227,13 +222,11 @@ mufs_rename(const char *from, const char *to, unsigned int flags)
 }
 
 static struct fuse_operations mufs_oper = {
-    .init = mufs_init,
-    .getattr = mufs_getattr,
-    .readdir = mufs_readdir,
-    .readlink = mufs_readlink,
-    .open = mufs_open,
-    .read = mufs_read,
-    .rename = mufs_rename,
+        .init = mufs_init,
+        .getattr = mufs_getattr,
+        .readdir = mufs_readdir,
+        .readlink = mufs_readlink,
+        .rename = mufs_rename,
 };
 
 int
