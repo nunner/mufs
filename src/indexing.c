@@ -17,7 +17,7 @@
 #include "mufs.h"
 #include "db.h"
 
-static char *untagged = "<Untagged>";
+static char *untagged = "Untagged";
 
 file_t *
 get_tags(const char *fpath)
