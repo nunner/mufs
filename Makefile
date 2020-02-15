@@ -22,7 +22,7 @@ create_db:
 install:
 	sudo cp $(TARGET) /usr/local/bin/$(TARGET)
 
+update: clean all
+
 clean:
-	rm $(TARGET)
 	rm $(DB)
-	umount root
