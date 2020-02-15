@@ -17,6 +17,8 @@
 #include "mufs.h"
 #include "db.h"
 
+static char *untagged = "Untagged";
+
 file_t *
 get_tags(const char *fpath)
 {
@@ -30,8 +32,17 @@ get_tags(const char *fpath)
 
         file->path = fpath;
         file->tags->artist = taglib_tag_artist(tag);
+        if (strlen(file->tags->artist) == 0)
+            file->tags->artist = untagged;
+
         file->tags->album =  taglib_tag_album(tag);
+        if (strlen(file->tags->album) == 0)
+            file->tags->album = untagged;
+
         file->tags->title = taglib_tag_title(tag);
+        if (strlen(file->tags->title) == 0)
+            file->tags->artist = basename(fpath);
+
 
         taglib_file_free(tfile);
     }
@@ -45,12 +56,7 @@ store_file(const char *fpath, const struct stat *sb,
 {
     if(tflag == FTW_F || tflag == FTW_SL) {
         file_t *file = get_tags(fpath);
-        // TODO Properly handle files with incomplete tags
-        if(file->path != NULL &&
-            strlen(file->tags->artist) > 0 &&
-            strlen(file->tags->album) > 0 &&
-            strlen(file->tags->title) > 0
-        )
+        if(file->path != NULL)
             insert_file(file);
     }
     return 0;
