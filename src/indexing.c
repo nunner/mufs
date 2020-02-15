@@ -17,6 +17,8 @@
 #include "mufs.h"
 #include "db.h"
 
+static char *untagged = "<Untagged>";
+
 file_t *
 get_tags(const char *fpath)
 {
@@ -30,8 +32,17 @@ get_tags(const char *fpath)
 
         file->path = fpath;
         file->tags->artist = taglib_tag_artist(tag);
+        if (strlen(file->tags->artist) == 0)
+            file->tags->artist = untagged;
+
         file->tags->album =  taglib_tag_album(tag);
+        if (strlen(file->tags->album) == 0)
+            file->tags->album = untagged;
+
         file->tags->title = taglib_tag_title(tag);
+        if (strlen(file->tags->title) == 0)
+            file->tags->artist = basename(fpath);
+
 
         taglib_file_free(tfile);
     }
