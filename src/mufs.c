@@ -19,6 +19,7 @@
 #include "mufs.h"
 #include "indexing.h"
 #include "db.h"
+#include "args.h"
 
 struct mufs_data *data;
 
@@ -68,17 +69,6 @@ mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)
     }
 
     return 0;
-}
-
-
-/**
- * Print the usage of the program.
- */
-void
-mufs_usage()
-{
-    printf("Usage: ./mufs [args] [root dir] [mount point]\n");
-    exit(1);
 }
 
 /**
@@ -232,10 +222,11 @@ static struct fuse_operations mufs_oper = {
 int
 main(int argc, char* argv[])
 {
-    if(argc < 3)
-        mufs_usage();
-
     data = (struct mufs_data *) malloc(sizeof(struct mufs_data));
+    data->opts = (struct mufs_opts *) malloc(sizeof(struct mufs_opts));
+
+    parse_args(data, &argc, &argv);
+
     data->rootdir = realpath(argv[argc - 2], NULL);
 
     argv[argc-2] = argv[argc-1];

@@ -9,9 +9,15 @@
 
 #include <fuse.h>
 #include <sqlite3.h>
+#include <stdbool.h>
+
+struct mufs_opts {
+    bool track;
+};
 
 struct mufs_data {
     char *rootdir;
+    struct mufs_opts *opts;
     sqlite3 *db;
 };
 

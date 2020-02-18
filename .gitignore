@@ -2,3 +2,4 @@ mufs
 mount/
 root/
 .idea/
+compile_commands.json
