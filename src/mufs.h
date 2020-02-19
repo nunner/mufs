@@ -18,7 +18,6 @@ struct mufs_opts {
 struct mufs_data {
     char *rootdir;
     struct mufs_opts *opts;
-    sqlite3 *db;
 };
 
 typedef struct {
