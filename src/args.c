@@ -20,8 +20,15 @@ char *mufs_version    = "0.1";
 char *mufs_maintainer = "leo@leonunner.com";
 char mufs_description[] = "A FUSE system based on music tags.";
 
+/*
+ * Default values for each option.
+ */
+static int   _TRACK_DEFAULT  = false;
+static char *_FORMAT_DEFAULT = "%a/%f/%t";
+
 static struct fuse_opt mufs_opts[] = {
         MUFS_OPT("--track", track, 1),
+        MUFS_OPT("--format=%s", format, 0),
 
         FUSE_OPT_KEY("--help", MUFS_HELP),
         FUSE_OPT_KEY("--version", MUFS_VERSION),
@@ -37,7 +44,8 @@ help()
             "\t--help\t\tdisplay this help text\n"
             "\t--version\tdisplay the version of your mufs installation\n"
             "\nDisplay options:\n"
-            "\t--track\t\tdisplay track numbers before the title\n");
+            "\t--track\t\tdisplay track numbers before the title\n"
+            "\t--format\t\tspecify a format which is used to generate the folder structure\n");
 }
 
 static int
@@ -59,10 +67,18 @@ void
 parse_args(struct mufs_data *data, int *argc, char **argv[])
 {
     // Default values
-    data->opts->track = false;
+    data->opts->track = _TRACK_DEFAULT;
 
     struct fuse_args args = FUSE_ARGS_INIT(*argc, *argv);
     fuse_opt_parse(&args, data->opts, mufs_opts, mufs_opt_proc);
+
+    /**
+     * Set string parameters here. If you do it *before* calling
+     * fuse_opt_parse, it will try to free the default parameter,
+     * which will segfault as it is not allocated through malloc.
+     */
+    if(!data->opts->format)
+        data->opts->format = _FORMAT_DEFAULT;
 
     if(*argc < 3) {
         printf("Please specify at least 2 parameters.\n\n");

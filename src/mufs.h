@@ -13,6 +13,7 @@
 
 struct mufs_opts {
     bool track;
+    char *format;
 };
 
 struct mufs_data {

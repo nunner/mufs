@@ -5,6 +5,20 @@ mufs is a FUSE driver which allows you to mount your music collection and browse
 - change a files' tags by moving/renaming it in mufs.
 - browse your music collection without having to order the physical files.
 
+### Formatting options
+|    | Formatting options |
+|----|--------------------|
+| %a | artist             |
+| %f | album              |
+| %t | title              |
+| %n | track number       |
+| %g |  genre             |
+
+Specify using a format using the --format flag. Example: 
+```
+mufs --format="%a/%f/%n - %t" mount root
+```
+
 # Dependencies
 mufs depends on
 - taglib
