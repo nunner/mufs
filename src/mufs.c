@@ -16,6 +16,7 @@
 #include "indexing.h"
 #include "db.h"
 #include "args.h"
+#include "parser.h"
 
 struct mufs_data *data;
 
@@ -33,6 +34,8 @@ get_tags_from_path(const char *path)
     tags->album = strtok(NULL, "/");
     tags->title = strtok(NULL, "/");
 
+	free(fpath);
+
     return tags;
 }
 
@@ -43,9 +46,10 @@ get_tags_from_path(const char *path)
 int
 level(const char *path)
 {
+	if(strcmp(path, "/") == 0) return 0;
+
     int i;
-    for (i = 0; path[i]; path[i] == '/' ? i++ : *path++)
-        ;
+    for (i = 1; path[i]; path[i] == '/' ? i++ : *path++) ;
     return i;
 }
 
@@ -136,24 +140,16 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     sqliteData->buf = buf;
     sqliteData->filler = filler;
 
-    int i = level(path);
     // This is done as to not invalidate the const qualifier
     char *fpath = NULL;
     asprintf(&fpath, "%s", path);
 
-    if(strcmp(path, "/") == 0) {
-        get_artists(sqliteData);
-    } else if (i == 1) {
-        get_albums(sqliteData, fpath + 1);
-    } else {
-        char *artist = strtok(fpath, "/");
-        char *album = strtok(NULL, "/");
-
-        get_titles(sqliteData, artist, album);
-    }
+	get_level(sqliteData, level(fpath), fpath);
 
     filler(buf, ".", NULL, 0, 0);
     filler(buf, "..", NULL, 0, 0);
+
+	free(fpath);
 
     return 0;
 }
@@ -218,10 +214,11 @@ static struct fuse_operations mufs_oper = {
 int
 main(int argc, char* argv[])
 {
-    data = (struct mufs_data *) malloc(sizeof(struct mufs_data));
-    data->opts = (struct mufs_opts *) malloc(sizeof(struct mufs_opts));
+    data = malloc(sizeof(struct mufs_data));
+    data->opts = malloc(sizeof(struct mufs_opts));
 
     parse_args(data, &argc, &argv);
+	parse_format(data->opts);
 
     data->rootdir = realpath(argv[argc - 2], NULL);
 

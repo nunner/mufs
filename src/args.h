@@ -11,6 +11,5 @@ enum {
     MUFS_TARGET = 0x102
 };
 
-
 void
 parse_args(struct mufs_data *data, int *argc, char **argv[]);

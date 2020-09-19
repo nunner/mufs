@@ -8,81 +8,81 @@
 !_TAG_PROGRAM_VERSION	0.0.0	/a3c87ab5/
 $(TARGET)	Makefile	/^$(TARGET): $(SRC)$/;"	t
 0	compile_commands.json	/^   "gcc",$/;"	s	array:0.arguments
+0	compile_commands.json	/^   "gcc",$/;"	s	array:1.arguments
 0	compile_commands.json	/^ {$/;"	o
 1	compile_commands.json	/^   "-o",$/;"	s	array:0.arguments
+1	compile_commands.json	/^   "-o",$/;"	s	array:1.arguments
+1	compile_commands.json	/^ {$/;"	o
 10	compile_commands.json	/^   "-I\/usr\/include\/fuse3",$/;"	s	array:0.arguments
+10	compile_commands.json	/^   "-I\/usr\/include\/fuse3",$/;"	s	array:1.arguments
 11	compile_commands.json	/^   "-I\/usr\/include\/taglib",$/;"	s	array:0.arguments
+11	compile_commands.json	/^   "-I\/usr\/include\/taglib",$/;"	s	array:1.arguments
 12	compile_commands.json	/^   "src\/args.c",$/;"	s	array:0.arguments
+12	compile_commands.json	/^   "src\/args.c",$/;"	s	array:1.arguments
 13	compile_commands.json	/^   "src\/db.c",$/;"	s	array:0.arguments
+13	compile_commands.json	/^   "src\/db.c",$/;"	s	array:1.arguments
 14	compile_commands.json	/^   "src\/indexing.c",$/;"	s	array:0.arguments
+14	compile_commands.json	/^   "src\/indexing.c",$/;"	s	array:1.arguments
 15	compile_commands.json	/^   "src\/mufs.c",$/;"	s	array:0.arguments
+15	compile_commands.json	/^   "src\/mufs.c",$/;"	s	array:1.arguments
 16	compile_commands.json	/^   "-lsqlite3",$/;"	s	array:0.arguments
+16	compile_commands.json	/^   "src\/parser.c",$/;"	s	array:1.arguments
 17	compile_commands.json	/^   "-lm",$/;"	s	array:0.arguments
+17	compile_commands.json	/^   "-lsqlite3",$/;"	s	array:1.arguments
+18	compile_commands.json	/^   "-lm",$/;"	s	array:1.arguments
 18	compile_commands.json	/^   "-lz",$/;"	s	array:0.arguments
 19	compile_commands.json	/^   "-lfuse3",$/;"	s	array:0.arguments
+19	compile_commands.json	/^   "-lz",$/;"	s	array:1.arguments
 2	compile_commands.json	/^   "mufs",$/;"	s	array:0.arguments
+2	compile_commands.json	/^   "mufs",$/;"	s	array:1.arguments
+20	compile_commands.json	/^   "-lfuse3",$/;"	s	array:1.arguments
 20	compile_commands.json	/^   "-lpthread",$/;"	s	array:0.arguments
+21	compile_commands.json	/^   "-lpthread",$/;"	s	array:1.arguments
 21	compile_commands.json	/^   "-ltag_c",$/;"	s	array:0.arguments
 22	compile_commands.json	/^   "-ltag"$/;"	s	array:0.arguments
+22	compile_commands.json	/^   "-ltag_c",$/;"	s	array:1.arguments
+23	compile_commands.json	/^   "-ltag"$/;"	s	array:1.arguments
+3	compile_commands.json	/^   "-g",$/;"	s	array:1.arguments
 3	compile_commands.json	/^   "-lstdc++",$/;"	s	array:0.arguments
+4	compile_commands.json	/^   "-Wall",$/;"	s	array:1.arguments
 4	compile_commands.json	/^   "-g",$/;"	s	array:0.arguments
 5	compile_commands.json	/^   "-Wall",$/;"	s	array:0.arguments
+5	compile_commands.json	/^   "-Werror",$/;"	s	array:1.arguments
 6	compile_commands.json	/^   "-D_FILE_OFFSET_BITS=64",$/;"	s	array:0.arguments
+6	compile_commands.json	/^   "-O3",$/;"	s	array:1.arguments
 7	compile_commands.json	/^   "-Wdiscarded-qualifiers",$/;"	s	array:0.arguments
-728baf40-8497-4a3b-ae6d-91b40820edcc	.idea/workspace.xml	/^      <changelist id="728baf40-8497-4a3b-ae6d-91b40820edcc" name="Default Changelist" comment=""/;"	i
-728baf40-8497-4a3b-ae6d-91b40820edcc	.idea/workspace.xml	/^    <list default="true" id="728baf40-8497-4a3b-ae6d-91b40820edcc" name="Default Changelist" com/;"	i
+7	compile_commands.json	/^   "-fsanitize=undefined",$/;"	s	array:1.arguments
 8	compile_commands.json	/^   "-D",$/;"	s	array:0.arguments
+8	compile_commands.json	/^   "-D",$/;"	s	array:1.arguments
 9	compile_commands.json	/^   "_GNU_SOURCE",$/;"	s	array:0.arguments
+9	compile_commands.json	/^   "_GNU_SOURCE",$/;"	s	array:1.arguments
 About	README.md	/^# About$/;"	c
 Album	scheme.sql	/^	"Album"	TEXT NOT NULL,$/;"	E	table:FILES
-Ant Build	.idea/workspace.xml	/^      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" \/>$/;"	i
 Artist	scheme.sql	/^	"Artist"	TEXT NOT NULL,$/;"	E	table:FILES
-Build	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Build" order="12" weight="0.16945606" \/>$/;"	i
-CFLAGS	Makefile	/^CFLAGS=-lstdc++ -g -Wall -D_FILE_OFFSET_BITS=64 -Wdiscarded-qualifiers -D _GNU_SOURCE$/;"	m
-Commander	.idea/workspace.xml	/^      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING/;"	i
-Cvs	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" \/>$/;"	i
+BUFSIZE	src/mufs.h	/^#define BUFSIZE /;"	d
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-g -Wall -Werror -O3 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address $/;"	m
 DB	Makefile	/^DB=~\/.local\/share\/mufs\/mufs.db$/;"	m
-DB Browser	.idea/workspace.xml	/^      <window_info id="DB Browser" order="2" \/>$/;"	i
-DB Execution Console	.idea/workspace.xml	/^      <window_info anchor="bottom" id="DB Execution Console" order="8" \/>$/;"	i
-Database	.idea/workspace.xml	/^      <window_info anchor="right" id="Database" order="5" \/>$/;"	i
-Database Changes	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Database Changes" order="9" \/>$/;"	i
-Debug	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" \/>$/;"	i
-Default	.idea/workspace.xml	/^    <task active="true" id="Default" summary="Default task">$/;"	i
 Dependencies	README.md	/^# Dependencies$/;"	c
-Event Log	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" \/>$/;"	i
 FD_NUM	src/indexing.c	/^#define FD_NUM /;"	d	file:
 FILES	scheme.sql	/^CREATE TABLE "FILES" ($/;"	t
+FORMAT_DEFAULT	src/args.c	/^static char *FORMAT_DEFAULT = "%a\/%f\/%t";$/;"	v	typeref:typename:char *	file:
 FUSE_USE_VERSION	src/args.c	/^#define FUSE_USE_VERSION /;"	d	file:
 FUSE_USE_VERSION	src/mufs.c	/^#define FUSE_USE_VERSION /;"	d	file:
 FUSE_USE_VERSION	src/mufs.h	/^#define FUSE_USE_VERSION /;"	d
-Favorites	.idea/workspace.xml	/^      <window_info id="Favorites" order="3" side_tool="true" \/>$/;"	i
 Features	README.md	/^### Features$/;"	S
-Find	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Find" order="1" \/>$/;"	i
 Formatting options	README.md	/^### Formatting options$/;"	S
-GfmBrowser	.idea/workspace.xml	/^      <window_info anchor="right" id="GfmBrowser" order="4" \/>$/;"	i
-Hierarchy	.idea/workspace.xml	/^      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" \/>$/;"	i
-Inspection	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" \/>$/;"	i
 Installation	README.md	/^# Installation$/;"	c
 LDLIBS	Makefile	/^LDLIBS = -lsqlite3$/;"	m
 MUFS_HELP	src/args.h	/^    MUFS_HELP   = 0x100,$/;"	e	enum:__anon4fcb96ff0103
 MUFS_OPT	src/args.c	/^#define MUFS_OPT(/;"	d	file:
 MUFS_TARGET	src/args.h	/^    MUFS_TARGET = 0x102$/;"	e	enum:__anon4fcb96ff0103
 MUFS_VERSION	src/args.h	/^    MUFS_VERSION= 0x101,$/;"	e	enum:__anon4fcb96ff0103
-Message	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Message" order="0" \/>$/;"	i
 Path	scheme.sql	/^	"Path"	TEXT NOT NULL,$/;"	E	table:FILES
-Project	.idea/workspace.xml	/^      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight/;"	i
-ProjectPane	.idea/workspace.xml	/^      <pane id="ProjectPane">$/;"	i
-Run	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Run" order="2" weight="0.3294979" \/>$/;"	i
 SRC	Makefile	/^SRC=$(wildcard src\/*.c)$/;"	m
-Scope	.idea/workspace.xml	/^      <pane id="Scope" \/>$/;"	i
-Structure	.idea/workspace.xml	/^      <window_info id="Structure" order="1" side_tool="true" weight="0.25" \/>$/;"	i
 TARGET	Makefile	/^TARGET=mufs$/;"	m
-TODO	.idea/workspace.xml	/^      <window_info anchor="bottom" id="TODO" order="6" \/>$/;"	i
-Terminal	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Terminal" order="10" \/>$/;"	i
+TRACK_DEFAULT	src/args.c	/^static int   TRACK_DEFAULT  = false;$/;"	v	typeref:typename:int	file:
 Title	scheme.sql	/^	"Title"	TEXT NOT NULL,$/;"	E	table:FILES
-Version Control	.idea/workspace.xml	/^      <window_info anchor="bottom" id="Version Control" order="7" \/>$/;"	i
-_FORMAT_DEFAULT	src/args.c	/^static char *_FORMAT_DEFAULT = "%a\/%f\/%t";$/;"	v	typeref:typename:char *	file:
-_TRACK_DEFAULT	src/args.c	/^static int   _TRACK_DEFAULT  = false;$/;"	v	typeref:typename:int	file:
 _XOPEN_SOURCE	src/indexing.c	/^#define _XOPEN_SOURCE /;"	d	file:
 __anon4fcb96ff0103	src/args.h	/^enum {$/;"	g
 __anon6bff3bad0108	src/mufs.h	/^typedef struct {$/;"	s
@@ -91,67 +91,39 @@ __anon6bff3bad0308	src/mufs.h	/^typedef struct {$/;"	s
 album	src/mufs.h	/^    char *album;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
 all	Makefile	/^all: $(TARGET) create_db$/;"	t
 arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:0
+arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:1
 artist	src/mufs.h	/^    char *artist;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
 begin_transaction	src/db.c	/^begin_transaction() {$/;"	f	typeref:typename:void
 buf	src/mufs.h	/^    void * buf;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:void *
+check	src/indexing.c	/^#define check(/;"	d	file:
 clean	Makefile	/^clean:$/;"	t
-cluster	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="cluster" selected="false" \/>$/;"	i
-cluster	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="cluster" selected="true" \/>$/;"	i
-cluster	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="cluster" \/>$/;"	i
-column	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="column" \/>$/;"	i
 commit_transaction	src/db.c	/^commit_transaction() {$/;"	f	typeref:typename:void
-constraint	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="constraint" selected="false" \/>$/;"	i
-constraint	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="constraint" selected="true" \/>$/;"	i
-constraint	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="constraint" \/>$/;"	i
 create_db	Makefile	/^create_db:$/;"	t
 data	src/mufs.c	/^struct mufs_data *data;$/;"	v	typeref:struct:mufs_data *
-datatype	.idea/dbnavigator.xml	/^          <filter-element type="RESERVED_WORD" id="datatype" selected="true" \/>$/;"	i
-datatype	.idea/dbnavigator.xml	/^        <sorting-element type="RESERVED_WORD" id="datatype" \/>$/;"	i
 db	src/db.c	/^static sqlite3 *db;$/;"	v	typeref:typename:sqlite3 *	file:
 db_file	src/db.c	/^const char *db_file = "~\/.local\/share\/mufs\/mufs.db";$/;"	v	typeref:typename:const char *
-dblink	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="dblink" selected="false" \/>$/;"	i
-dblink	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="dblink" selected="true" \/>$/;"	i
-dblink	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="dblink" \/>$/;"	i
 debug	Makefile	/^debug: $(TARGET)$/;"	t
-development	.idea/dbnavigator.xml	/^          <environment-type id="development" name="Development" description="Development environ/;"	i
-dimension	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="dimension" selected="false" \/>$/;"	i
-dimension	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="dimension" selected="true" \/>$/;"	i
-dimension	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="dimension" \/>$/;"	i
 directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\/mufs",$/;"	s	object:0
-exception	.idea/dbnavigator.xml	/^          <filter-element type="RESERVED_WORD" id="exception" selected="true" \/>$/;"	i
+directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\/mufs",$/;"	s	object:1
 file	compile_commands.json	/^  "file": "src\/mufs.c"$/;"	s	object:0
+file	compile_commands.json	/^  "file": "src\/parser.c"$/;"	s	object:1
 file_t	src/mufs.h	/^} file_t;$/;"	t	typeref:struct:__anon6bff3bad0208
 filler	src/mufs.h	/^    fuse_fill_dir_t filler;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:fuse_fill_dir_t
-format	src/mufs.h	/^    char *format;$/;"	m	struct:mufs_opts	typeref:typename:char *
-function	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="function" selected="false" \/>$/;"	i
-function	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="function" selected="true" \/>$/;"	i
-function	.idea/dbnavigator.xml	/^          <filter-element type="RESERVED_WORD" id="function" selected="true" \/>$/;"	i
-function	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="function" \/>$/;"	i
-function	.idea/dbnavigator.xml	/^        <sorting-element type="RESERVED_WORD" id="function" \/>$/;"	i
-get_albums	src/db.c	/^get_albums(mufs_sqlite_data *mufs_data, char *artist)$/;"	f	typeref:typename:void
-get_artists	src/db.c	/^get_artists(mufs_sqlite_data *mufs_data)$/;"	f	typeref:typename:void
+format	src/mufs.h	/^	struct mufs_format *format;$/;"	m	struct:mufs_opts	typeref:struct:mufs_format *
+format_str	src/mufs.h	/^	char *format_str;$/;"	m	struct:mufs_opts	typeref:typename:char *
+get_level	src/db.c	/^get_level(mufs_sqlite_data *mufs_data, int levels, char *path)$/;"	f	typeref:typename:void
 get_tags	src/indexing.c	/^get_tags(const char *fpath)$/;"	f	typeref:typename:file_t *
 get_tags_from_path	src/mufs.c	/^get_tags_from_path(const char *path)$/;"	f	typeref:typename:tags_t *
-get_titles	src/db.c	/^get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album)$/;"	f	typeref:typename:void
 help	src/args.c	/^help()$/;"	f	typeref:typename:void	file:
-index	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="index" selected="false" \/>$/;"	i
-index	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="index" selected="true" \/>$/;"	i
-index	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="index" \/>$/;"	i
-index_files	src/indexing.c	/^index_files(const char *path)$/;"	f	typeref:typename:void
+index_files	src/indexing.c	/^index_files(char *path)$/;"	f	typeref:typename:void
 insert_file	src/db.c	/^insert_file(file_t *file)$/;"	f	typeref:typename:void
 install	Makefile	/^install:$/;"	t
-integration	.idea/dbnavigator.xml	/^          <environment-type id="integration" name="Integration" description="Integration environ/;"	i
-keyword	.idea/dbnavigator.xml	/^          <filter-element type="RESERVED_WORD" id="keyword" selected="true" \/>$/;"	i
-keyword	.idea/dbnavigator.xml	/^        <sorting-element type="RESERVED_WORD" id="keyword" \/>$/;"	i
 level	src/mufs.c	/^level(const char *path)$/;"	f	typeref:typename:int
 main	src/mufs.c	/^main(int argc, char* argv[])$/;"	f	typeref:typename:int
-make	.idea/workspace.xml	/^      <window_info anchor="right" id="make" order="3" \/>$/;"	i
-materialized view	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="materialized view" selected="false" \/>$/;"	i
-materialized view	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="materialized view" selected="true" \/>$/;"	i
-materialized view	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="materialized view" \/>$/;"	i
 mufs_data	src/mufs.h	/^struct mufs_data {$/;"	s
 mufs_description	src/args.c	/^char mufs_description[] = "A FUSE system based on music tags.";$/;"	v	typeref:typename:char[]
 mufs_fill_callback	src/mufs.c	/^mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)$/;"	f	typeref:typename:int
+mufs_format	src/mufs.h	/^struct mufs_format {$/;"	s
 mufs_getattr	src/mufs.c	/^mufs_getattr (const char *path, struct stat *stbuf,$/;"	f	typeref:typename:int	file:
 mufs_init	src/mufs.c	/^mufs_init(struct fuse_conn_info *conn,$/;"	f	typeref:typename:void *	file:
 mufs_maintainer	src/args.c	/^char *mufs_maintainer 	= "leo@leonunner.com";$/;"	v	typeref:typename:char *
@@ -163,55 +135,24 @@ mufs_readdir	src/mufs.c	/^mufs_readdir(const char *path, void *buf, fuse_fill_di
 mufs_readlink	src/mufs.c	/^mufs_readlink(const char *path, char *buf, size_t size)$/;"	f	typeref:typename:int	file:
 mufs_rename	src/mufs.c	/^mufs_rename(const char *from, const char *to, unsigned int flags)$/;"	f	typeref:typename:int	file:
 mufs_sqlite_data	src/mufs.h	/^} mufs_sqlite_data;$/;"	t	typeref:struct:__anon6bff3bad0308
-mufs_version	src/args.c	/^char *mufs_version    	= "0.1";$/;"	v	typeref:typename:char *
+mufs_version	src/args.c	/^char *mufs_version    	= "0.2";$/;"	v	typeref:typename:char *
+name	src/mufs.h	/^	char *name;$/;"	m	struct:mufs_format	typeref:typename:char *
+names	src/parser.c	/^static char *names[] = {$/;"	v	typeref:typename:char * []	file:
 open_conn	src/db.c	/^open_conn()$/;"	f	typeref:typename:void
 opts	src/mufs.h	/^    struct mufs_opts *opts;$/;"	m	struct:mufs_data	typeref:struct:mufs_opts *
-other	.idea/dbnavigator.xml	/^          <environment-type id="other" name="Other" description="" color="-1576\/-10724543" read/;"	i
-package	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="package" selected="false" \/>$/;"	i
-package	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="package" selected="true" \/>$/;"	i
-package	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="package" \/>$/;"	i
-parameter	.idea/dbnavigator.xml	/^          <filter-element type="RESERVED_WORD" id="parameter" selected="true" \/>$/;"	i
-parameter	.idea/dbnavigator.xml	/^        <sorting-element type="RESERVED_WORD" id="parameter" \/>$/;"	i
 parse_args	src/args.c	/^parse_args(struct mufs_data *data, int *argc, char **argv[])$/;"	f	typeref:typename:void
-parse_format	src/parser.c	/^parse_format (char *conf)$/;"	f	typeref:typename:void
+parse_format	src/parser.c	/^parse_format (struct mufs_opts *opts)$/;"	f	typeref:typename:void
 path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
-privilege	.idea/dbnavigator.xml	/^          <filter-element type="OBJECT" id="privilege" selected="true" \/>$/;"	i
-procedure	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="procedure" selected="false" \/>$/;"	i
-procedure	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="procedure" selected="true" \/>$/;"	i
-procedure	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="procedure" \/>$/;"	i
-production	.idea/dbnavigator.xml	/^          <environment-type id="production" name="Production" description="Productive environmen/;"	i
 rc	src/db.c	/^static int rc;$/;"	v	typeref:typename:int	file:
 rename_file	src/db.c	/^rename_file(tags_t *old, tags_t *new)$/;"	f	typeref:typename:char *
 resolve_title	src/db.c	/^resolve_title(char *artist, char *album, char *title)$/;"	f	typeref:typename:char *
-role	.idea/dbnavigator.xml	/^          <filter-element type="OBJECT" id="role" selected="true" \/>$/;"	i
-role	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="role" \/>$/;"	i
 rootdir	src/mufs.h	/^    char *rootdir;$/;"	m	struct:mufs_data	typeref:typename:char *
-schema	.idea/dbnavigator.xml	/^          <filter-element type="OBJECT" id="schema" selected="true" \/>$/;"	i
-schema	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="schema" \/>$/;"	i
-sequence	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="sequence" selected="false" \/>$/;"	i
-sequence	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="sequence" selected="true" \/>$/;"	i
-sequence	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="sequence" \/>$/;"	i
+run	Makefile	/^run: $(TARGET)$/;"	t
 store_file	src/indexing.c	/^store_file(const char *fpath, const struct stat *sb,$/;"	f	typeref:typename:int	file:
-synonym	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="synonym" selected="false" \/>$/;"	i
-synonym	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="synonym" selected="true" \/>$/;"	i
-synonym	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="synonym" \/>$/;"	i
-table	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="table" selected="false" \/>$/;"	i
-table	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="table" selected="true" \/>$/;"	i
-table	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="table" \/>$/;"	i
 tags	src/mufs.h	/^    tags_t *tags;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:tags_t *
 tags_t	src/mufs.h	/^} tags_t;$/;"	t	typeref:struct:__anon6bff3bad0108
 title	src/mufs.h	/^    char *title;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
 track	src/mufs.h	/^    bool track;$/;"	m	struct:mufs_opts	typeref:typename:bool
-trigger	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="trigger" selected="false" \/>$/;"	i
-trigger	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="trigger" selected="true" \/>$/;"	i
-trigger	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="trigger" \/>$/;"	i
-type	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="type" selected="false" \/>$/;"	i
-type	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="type" selected="true" \/>$/;"	i
-type	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="type" \/>$/;"	i
 untagged	src/indexing.c	/^static char *untagged = "Untagged";$/;"	v	typeref:typename:char *	file:
 update	Makefile	/^update: clean all install$/;"	t
-user	.idea/dbnavigator.xml	/^          <filter-element type="OBJECT" id="user" selected="true" \/>$/;"	i
-user	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="user" \/>$/;"	i
-view	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="view" selected="false" \/>$/;"	i
-view	.idea/dbnavigator.xml	/^            <filter-element type="OBJECT" id="view" selected="true" \/>$/;"	i
-view	.idea/dbnavigator.xml	/^        <sorting-element type="OBJECT" id="view" \/>$/;"	i
+val_at_level	src/db.c	/^val_at_level(char *path, int level)$/;"	f	typeref:typename:char *

@@ -6,9 +6,16 @@
 #include <sqlite3.h>
 #include <stdbool.h>
 
+#define BUFSIZE 1000
+
+struct mufs_format {
+	char *name;
+};
+
 struct mufs_opts {
     bool track;
-    char *format;
+	char *format_str;
+	struct mufs_format *format;
 };
 
 struct mufs_data {
@@ -27,7 +34,7 @@ typedef struct {
     tags_t *tags;
 } file_t;
 
-/**
+/*
  * This is a hack, but it works. When calling the SQLITE
  * SELECT, we can optionally pass our own data. It only works
  * through callbacks, so when filling the directory, we have to pass

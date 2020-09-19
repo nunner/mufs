@@ -17,6 +17,17 @@ const char *db_file = "~/.local/share/mufs/mufs.db";
 static sqlite3 *db;
 static int rc;
 
+extern struct mufs_data *data;
+
+char *
+val_at_level(char *path, int level)
+{
+	char *ptr = strtok(path, "/");
+	for(size_t i = 0; i < level; i++)
+		ptr = strtok(NULL, "/");
+	return ptr;
+}
+
 /**
  * Open a connection and store it in the private data field.
  * This connection is used by all other database methods.
@@ -37,44 +48,23 @@ open_conn()
     wordfree(&exp_result);
 }
 
-/**
- * Get all individual artists from the database.
- */
 void
-get_artists(mufs_sqlite_data *mufs_data)
+get_level(mufs_sqlite_data *mufs_data, int levels, char *path)
 {
-    char *query = "SELECT DISTINCT Artist FROM FILES";
+    char query[BUFSIZE];
     char *err;
 
-    rc = sqlite3_exec(db, query, mufs_fill_callback, mufs_data, &err);
+	// There's gotta be a better way than this.
+	char *restore = malloc(strlen(path) + 1);
+	strcpy(restore, path);
 
-    sqlite3_free(err);
-}
-
-/**
- * Get all individual albums from a specific artist.
- */
-void
-get_albums(mufs_sqlite_data *mufs_data, char *artist)
-{
-    char *query = NULL;
-    asprintf(&query, "SELECT DISTINCT Album FROM FILES WHERE Artist = '%s'", artist);
-    char *err;
-
-    rc = sqlite3_exec(db, query, mufs_fill_callback, mufs_data, &err);
-
-    sqlite3_free(err);
-}
-
-/**
- * Get all individual titles from a specific artist in a specific album.
- */
-void
-get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album)
-{
-    char *query = NULL;
-    asprintf(&query, "SELECT DISTINCT Title FROM FILES WHERE Artist = '%s' AND Album = '%s'", artist, album);
-    char *err;
+    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT %s FROM FILES WHERE 1=1", data->opts->format[levels].name);
+	for(size_t i = 0; i <= levels; i++) {
+		if(i != levels) {
+			cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
+			strcpy(path, restore);
+		}
+	}
 
     rc = sqlite3_exec(db, query, mufs_fill_callback, mufs_data, &err);
 

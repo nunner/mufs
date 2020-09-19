@@ -9,13 +9,7 @@ void
 insert_file(file_t *file);
 
 void
-get_artists(mufs_sqlite_data *mufs_data);
-
-void
-get_albums(mufs_sqlite_data *mufs_data, char *artist);
-
-void
-get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album);
+get_level(mufs_sqlite_data *mufs_data, int levels, char *path);
 
 char *
 resolve_title(char *artist, char *album, char *title);
