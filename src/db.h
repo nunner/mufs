@@ -1,9 +1,4 @@
-//
-// Created by nun on 2/9/20.
-//
-
-#ifndef MUFS_DB_H
-#define MUFS_DB_H
+#pragma once
 
 #include "mufs.h"
 
@@ -33,5 +28,3 @@ begin_transaction();
 
 void
 commit_transaction();
-
-#endif //MUFS_DB_H

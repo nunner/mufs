@@ -1,7 +1,3 @@
-//
-// Created by nun on 2/8/20.
-//
-
 #define FUSE_USE_VERSION 31
 
 #include <fuse.h>
@@ -23,7 +19,7 @@
 
 struct mufs_data *data;
 
-/**
+/*
  * Fill a tags_t object from a given path.
  */
 tags_t *
@@ -40,7 +36,7 @@ get_tags_from_path(const char *path)
     return tags;
 }
 
-/**
+/*
  * Calculate at which level the given path is. This is used for determining
  * whether a file is an Artist, Album or Title.
  */
@@ -53,7 +49,7 @@ level(const char *path)
     return i;
 }
 
-/**
+/*
  * When calling a sqlite prepared select, you have to give a callback.
  * This function takes the data provided by the SELECT and fills the
  * buffer provided by FUSE with it. It is used for all levels of the
@@ -71,7 +67,7 @@ mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)
     return 0;
 }
 
-/**
+/*
  * Initialize the file system, set config parameters.
  */
 static void *
@@ -87,7 +83,7 @@ mufs_init(struct fuse_conn_info *conn,
     return NULL;
 }
 
-/**
+/*
  * Read attributes from a file. The value returned is based
  * on the level in the file system itself.
  *      Level 0 -> Artist
@@ -118,7 +114,7 @@ mufs_getattr (const char *path, struct stat *stbuf,
     return 0;
 }
 
-/**
+/*
  * Read the contents of a directory. We fill our custom sqliteData
  * object with pointers to the buffer and the filler function.
  *
@@ -162,7 +158,7 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     return 0;
 }
 
-/**
+/*
  * Read a symlink on the disk. This is used for actually playing
  * and resolving the music files. The path is retrieved from the
  * database and put into te buffer.
@@ -180,7 +176,7 @@ mufs_readlink(const char *path, char *buf, size_t size)
     return 0;
 }
 
-/**
+/*
  * In mufs, renaming and moving files changes their tags.
  * The old tags are read from the current path, the new tags
  * are read from the path where the file is moved to, using

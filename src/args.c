@@ -1,7 +1,3 @@
-//
-// Created by nun on 2/16/20.
-//
-
 #define FUSE_USE_VERSION 31
 
 #include <fuse.h>
@@ -16,8 +12,8 @@
 
 // https://github.com/libfuse/libfuse/wiki/Option-Parsing
 
-char *mufs_version    = "0.1";
-char *mufs_maintainer = "leo@leonunner.com";
+char *mufs_version    	= "0.1";
+char *mufs_maintainer 	= "leo@leonunner.com";
 char mufs_description[] = "A FUSE system based on music tags.";
 
 /*

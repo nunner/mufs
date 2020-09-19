@@ -1,9 +1,4 @@
-//
-// Created by nun on 2/8/20.
-//
-
-#ifndef FUSE_TEST_MUFS_H
-#define FUSE_TEST_MUFS_H
+#pragma once
 
 #define FUSE_USE_VERSION 31
 
@@ -49,5 +44,3 @@ mufs_fill_callback(void* data, int argc, char** argv, char** azColName);
 
 char *
 translate_path(const char *path);
-
-#endif //FUSE_TEST_MUFS_H

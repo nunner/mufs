@@ -1,6 +1,3 @@
-//
-// Created by nun on 2/9/20.
-//
 #define _XOPEN_SOURCE 500
 
 #define FD_NUM 15
@@ -19,7 +16,7 @@
 
 static char *untagged = "Untagged";
 
-/**
+/*
  * Read the tags from a physical file. If the file is
  * invalid, they are discarded. If single tags are not set,
  * they are replaced with "Untagged".
