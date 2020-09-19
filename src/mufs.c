@@ -162,13 +162,15 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 static int
 mufs_readlink(const char *path, char *buf, size_t size)
 {
-    tags_t *tags = get_tags_from_path(path);
-
-    char *s = resolve_title(tags->artist, tags->album, tags->title);
+	char *fpath = malloc(strlen(path) + 1);
+	strcpy(fpath, path);
+	char *s = resolve_file(fpath, level(path));
     if(s != NULL) {
         strncpy(buf, s, size);
+		free(s);
     }
 
+	free(fpath);
     return 0;
 }
 
@@ -203,12 +205,19 @@ mufs_rename(const char *from, const char *to, unsigned int flags)
     return 0;
 }
 
+static int 
+mufs_opendir(const char *path, struct fuse_file_info *info)
+{
+	return 0;
+}
+
 static struct fuse_operations mufs_oper = {
         .init = mufs_init,
         .getattr = mufs_getattr,
         .readdir = mufs_readdir,
         .readlink = mufs_readlink,
         .rename = mufs_rename,
+		.opendir = mufs_opendir,
 };
 
 int

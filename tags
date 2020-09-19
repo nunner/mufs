@@ -127,6 +127,7 @@ mufs_format	src/mufs.h	/^struct mufs_format {$/;"	s
 mufs_getattr	src/mufs.c	/^mufs_getattr (const char *path, struct stat *stbuf,$/;"	f	typeref:typename:int	file:
 mufs_init	src/mufs.c	/^mufs_init(struct fuse_conn_info *conn,$/;"	f	typeref:typename:void *	file:
 mufs_maintainer	src/args.c	/^char *mufs_maintainer 	= "leo@leonunner.com";$/;"	v	typeref:typename:char *
+mufs_opendir	src/mufs.c	/^mufs_opendir(const char *path, struct fuse_file_info *info)$/;"	f	typeref:typename:int	file:
 mufs_oper	src/mufs.c	/^static struct fuse_operations mufs_oper = {$/;"	v	typeref:struct:fuse_operations	file:
 mufs_opt_proc	src/args.c	/^mufs_opt_proc(void *data, const char *arg, int key, struct fuse_args *outargs)$/;"	f	typeref:typename:int	file:
 mufs_opts	src/args.c	/^static struct fuse_opt mufs_opts[] = {$/;"	v	typeref:struct:fuse_opt[]	file:
@@ -145,6 +146,7 @@ parse_format	src/parser.c	/^parse_format (struct mufs_opts *opts)$/;"	f	typeref:
 path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
 rc	src/db.c	/^static int rc;$/;"	v	typeref:typename:int	file:
 rename_file	src/db.c	/^rename_file(tags_t *old, tags_t *new)$/;"	f	typeref:typename:char *
+resolve_file	src/db.c	/^resolve_file(char *path, uint64_t levels)$/;"	f	typeref:typename:char *
 resolve_title	src/db.c	/^resolve_title(char *artist, char *album, char *title)$/;"	f	typeref:typename:char *
 rootdir	src/mufs.h	/^    char *rootdir;$/;"	m	struct:mufs_data	typeref:typename:char *
 run	Makefile	/^run: $(TARGET)$/;"	t

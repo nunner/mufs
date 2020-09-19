@@ -15,6 +15,9 @@ char *
 resolve_title(char *artist, char *album, char *title);
 
 char *
+resolve_file(char *path, uint64_t levels);
+
+char *
 rename_file(tags_t *old, tags_t *new);
 
 void

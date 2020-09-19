@@ -59,15 +59,13 @@ get_level(mufs_sqlite_data *mufs_data, int levels, char *path)
 	strcpy(restore, path);
 
     int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT %s FROM FILES WHERE 1=1", data->opts->format[levels].name);
-	for(size_t i = 0; i <= levels; i++) {
-		if(i != levels) {
-			cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
-			strcpy(path, restore);
-		}
+	for(size_t i = 0; i < levels; i++) {
+		cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
+		strcpy(path, restore);
 	}
 
     rc = sqlite3_exec(db, query, mufs_fill_callback, mufs_data, &err);
-
+	free(restore);
     sqlite3_free(err);
 }
 
@@ -91,6 +89,37 @@ resolve_title(char *artist, char *album, char *title)
         asprintf(&ret, (char *) sqlite3_column_text(stmt, 0), artist);
 
     sqlite3_finalize(stmt);
+    return ret;
+}
+
+
+char *
+resolve_file(char *path, uint64_t levels)
+{
+    char query[BUFSIZE];
+
+	// There's gotta be a better way than this.
+	char *restore = malloc(strlen(path) + 1);
+	strcpy(restore, path);
+
+    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1");
+	for(size_t i = 0; i < levels; i++) {
+		cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
+		strcpy(path, restore);
+	}
+
+	printf("%s\n", query);
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+
+	char *ret = NULL;
+
+    if((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+        asprintf(&ret, "%s", (char *) sqlite3_column_text(stmt, 0));
+
+    sqlite3_finalize(stmt);
+	free(restore);
     return ret;
 }
 
