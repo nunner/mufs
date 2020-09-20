@@ -20,7 +20,7 @@ char mufs_description[] = "A FUSE system based on music tags.";
  * Default values for each option.
  */
 static int   TRACK_DEFAULT  = false;
-static char *FORMAT_DEFAULT = "%a/%f/%t";
+static char *FORMAT_DEFAULT = "%a/%f - %t";
 
 static struct fuse_opt mufs_opts[] = {
         MUFS_OPT("--track", track, 1),

@@ -9,13 +9,16 @@
 #define BUFSIZE 1000
 
 struct mufs_format {
-	char *name;
+	char **names;
+	char *format;
+	int specifiers;
 };
 
 struct mufs_opts {
     bool track;
 	char *format_str;
 	struct mufs_format *format;
+	uint64_t levels;
 };
 
 struct mufs_data {

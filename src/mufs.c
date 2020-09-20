@@ -105,7 +105,7 @@ mufs_getattr (const char *path, struct stat *stbuf,
     int i = level(path);
     memset(stbuf, 0, sizeof(struct stat));
 
-    if(i <= 2) {
+    if(i <= data->opts->levels) {
         stbuf->st_mode = S_IFDIR;
         stbuf->st_nlink = 2;
     } else {
@@ -143,6 +143,9 @@ mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     // This is done as to not invalidate the const qualifier
     char *fpath = NULL;
     asprintf(&fpath, "%s", path);
+
+	if(level(fpath) > data->opts->levels)
+		return -ENOENT;
 
 	get_level(sqliteData, level(fpath), fpath);
 

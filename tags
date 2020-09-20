@@ -61,12 +61,13 @@ Album	scheme.sql	/^	"Album"	TEXT NOT NULL,$/;"	E	table:FILES
 Artist	scheme.sql	/^	"Artist"	TEXT NOT NULL,$/;"	E	table:FILES
 BUFSIZE	src/mufs.h	/^#define BUFSIZE /;"	d
 CC	Makefile	/^CC=gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS=-g -Wall -Werror -O3 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address $/;"	m
+CFLAGS	Makefile	/^CFLAGS=-g -Wall -O0 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address $/;"	m
 DB	Makefile	/^DB=~\/.local\/share\/mufs\/mufs.db$/;"	m
 Dependencies	README.md	/^# Dependencies$/;"	c
 FD_NUM	src/indexing.c	/^#define FD_NUM /;"	d	file:
 FILES	scheme.sql	/^CREATE TABLE "FILES" ($/;"	t
-FORMAT_DEFAULT	src/args.c	/^static char *FORMAT_DEFAULT = "%a\/%f\/%t";$/;"	v	typeref:typename:char *	file:
+FMTSIZE	src/parser.c	/^#define FMTSIZE /;"	d	file:
+FORMAT_DEFAULT	src/args.c	/^static char *FORMAT_DEFAULT = "%a\/%f - %t";$/;"	v	typeref:typename:char *	file:
 FUSE_USE_VERSION	src/args.c	/^#define FUSE_USE_VERSION /;"	d	file:
 FUSE_USE_VERSION	src/mufs.c	/^#define FUSE_USE_VERSION /;"	d	file:
 FUSE_USE_VERSION	src/mufs.h	/^#define FUSE_USE_VERSION /;"	d
@@ -109,6 +110,7 @@ file	compile_commands.json	/^  "file": "src\/mufs.c"$/;"	s	object:0
 file	compile_commands.json	/^  "file": "src\/parser.c"$/;"	s	object:1
 file_t	src/mufs.h	/^} file_t;$/;"	t	typeref:struct:__anon6bff3bad0208
 filler	src/mufs.h	/^    fuse_fill_dir_t filler;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:fuse_fill_dir_t
+format	src/mufs.h	/^	char *format;$/;"	m	struct:mufs_format	typeref:typename:char *
 format	src/mufs.h	/^	struct mufs_format *format;$/;"	m	struct:mufs_opts	typeref:struct:mufs_format *
 format_str	src/mufs.h	/^	char *format_str;$/;"	m	struct:mufs_opts	typeref:typename:char *
 get_level	src/db.c	/^get_level(mufs_sqlite_data *mufs_data, int levels, char *path)$/;"	f	typeref:typename:void
@@ -119,6 +121,7 @@ index_files	src/indexing.c	/^index_files(char *path)$/;"	f	typeref:typename:void
 insert_file	src/db.c	/^insert_file(file_t *file)$/;"	f	typeref:typename:void
 install	Makefile	/^install:$/;"	t
 level	src/mufs.c	/^level(const char *path)$/;"	f	typeref:typename:int
+levels	src/mufs.h	/^	uint64_t levels;$/;"	m	struct:mufs_opts	typeref:typename:uint64_t
 main	src/mufs.c	/^main(int argc, char* argv[])$/;"	f	typeref:typename:int
 mufs_data	src/mufs.h	/^struct mufs_data {$/;"	s
 mufs_description	src/args.c	/^char mufs_description[] = "A FUSE system based on music tags.";$/;"	v	typeref:typename:char[]
@@ -137,7 +140,7 @@ mufs_readlink	src/mufs.c	/^mufs_readlink(const char *path, char *buf, size_t siz
 mufs_rename	src/mufs.c	/^mufs_rename(const char *from, const char *to, unsigned int flags)$/;"	f	typeref:typename:int	file:
 mufs_sqlite_data	src/mufs.h	/^} mufs_sqlite_data;$/;"	t	typeref:struct:__anon6bff3bad0308
 mufs_version	src/args.c	/^char *mufs_version    	= "0.2";$/;"	v	typeref:typename:char *
-name	src/mufs.h	/^	char *name;$/;"	m	struct:mufs_format	typeref:typename:char *
+names	src/mufs.h	/^	char **names;$/;"	m	struct:mufs_format	typeref:typename:char **
 names	src/parser.c	/^static char *names[] = {$/;"	v	typeref:typename:char * []	file:
 open_conn	src/db.c	/^open_conn()$/;"	f	typeref:typename:void
 opts	src/mufs.h	/^    struct mufs_opts *opts;$/;"	m	struct:mufs_data	typeref:struct:mufs_opts *
@@ -147,9 +150,9 @@ path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0208	typeref:typena
 rc	src/db.c	/^static int rc;$/;"	v	typeref:typename:int	file:
 rename_file	src/db.c	/^rename_file(tags_t *old, tags_t *new)$/;"	f	typeref:typename:char *
 resolve_file	src/db.c	/^resolve_file(char *path, uint64_t levels)$/;"	f	typeref:typename:char *
-resolve_title	src/db.c	/^resolve_title(char *artist, char *album, char *title)$/;"	f	typeref:typename:char *
 rootdir	src/mufs.h	/^    char *rootdir;$/;"	m	struct:mufs_data	typeref:typename:char *
 run	Makefile	/^run: $(TARGET)$/;"	t
+specifiers	src/mufs.h	/^	int specifiers;$/;"	m	struct:mufs_format	typeref:typename:int
 store_file	src/indexing.c	/^store_file(const char *fpath, const struct stat *sb,$/;"	f	typeref:typename:int	file:
 tags	src/mufs.h	/^    tags_t *tags;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:tags_t *
 tags_t	src/mufs.h	/^} tags_t;$/;"	t	typeref:struct:__anon6bff3bad0108

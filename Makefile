@@ -7,7 +7,7 @@ LDLIBS += $(shell pkg-config taglib_c --libs)
 LDFLAGS += $(shell pkg-config fuse3 --cflags)
 LDFLAGS += $(shell pkg-config taglib_c --cflags)
 
-CFLAGS=-g -Wall -Werror -O3 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address 
+CFLAGS=-g -Wall -O0 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address 
 CC=gcc
 
 SRC=$(wildcard src/*.c)

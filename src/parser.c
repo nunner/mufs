@@ -5,6 +5,8 @@
 #include "parser.h"
 #include "mufs.h"
 
+#define FMTSIZE 50
+
 static char *names[] = {
 	"Artist",
 	"Album",
@@ -14,31 +16,51 @@ static char *names[] = {
 void
 parse_format (struct mufs_opts *opts)
 {
+	opts->format = calloc(1, sizeof(struct mufs_format));
 	char *conf = opts->format_str;
-	int levels = 0;
+	int *specifiers = &opts->format[0].specifiers;
+	int offset = 0, levels = 0;
+	opts->format[levels].format = malloc(FMTSIZE);
+
+	if(*opts->format_str == '/') opts->format_str = &opts->format_str[1];
 
 	while(*conf != '\0') {
+		opts->format[levels].format[offset] = *conf;
+
 		if(*conf == '%') {
-			++conf;
-			opts->format = realloc(opts->format, (levels + 1) * sizeof(struct mufs_format));
+			++conf, ++offset;
+
+			specifiers = &opts->format[levels].specifiers;
+			opts->format[levels].names = realloc(opts->format[levels].names, 
+					(*specifiers + 1) * sizeof(char *));
 
 			switch(*conf) {
 				case 'a':
-					opts->format[levels].name = names[0];
+					opts->format[levels].names[*specifiers] = names[0];
 					break;
 				case 'f':
-					opts->format[levels].name = names[1];
+					opts->format[levels].names[*specifiers] = names[1];
 					break;
 				case 't':
-					opts->format[levels].name = names[2];
+					opts->format[levels].names[*specifiers] = names[2];
 					break;
 			}
 
-			++levels;
-		}
+			opts->format[levels].format[offset] = 's';
 
-		++conf;
+			++*specifiers;
+		} else if(*conf == '/') {
+			opts->format[levels].format[offset] = '\0';
+			offset = -1;
+			++levels;
+			opts->format = realloc(opts->format, (levels + 1) * sizeof(struct mufs_format));
+			opts->format[levels].names 		= 0;
+			opts->format[levels].specifiers = 0;
+			opts->format[levels].format 	= malloc(FMTSIZE);
+		}
+		
+		++conf, ++offset;
 	}
 
-	printf("\n");
+	opts->levels = levels;
 }

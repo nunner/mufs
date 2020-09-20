@@ -52,46 +52,36 @@ void
 get_level(mufs_sqlite_data *mufs_data, int levels, char *path)
 {
     char query[BUFSIZE];
+	char fmtstring[BUFSIZE];
     char *err;
 
 	// There's gotta be a better way than this.
 	char *restore = malloc(strlen(path) + 1);
 	strcpy(restore, path);
+	
+	// This is SO fucking cursed
+		
+	// Basically, we build the format string for the current level so that we can use printf() in sqlite
+	for(size_t i = 0, j = 0; i < data->opts->format[levels].specifiers; i++) {
+		j += snprintf(fmtstring + j, BUFSIZE - j, ", %s", data->opts->format[levels].names[i]);	
+	}
 
-    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT %s FROM FILES WHERE 1=1", data->opts->format[levels].name);
+    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT printf('%s' %s) FROM FILES WHERE 1=1", 
+																	data->opts->format[levels].format,
+																	fmtstring);
+	
+	// Loop through all conditions.
 	for(size_t i = 0; i < levels; i++) {
-		cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
-		strcpy(path, restore);
+		for(size_t j = 0; j < data->opts->format[i].specifiers; j++) {
+			cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].names[j], val_at_level(path, i));
+			strcpy(path, restore);
+		}
 	}
 
     rc = sqlite3_exec(db, query, mufs_fill_callback, mufs_data, &err);
 	free(restore);
     sqlite3_free(err);
 }
-
-/**
- * Get the physical file path from a file by giving the artist,
- * album and title tags.
- */
-char *
-resolve_title(char *artist, char *album, char *title)
-{
-    sqlite3_stmt *stmt;
-    sqlite3_prepare_v2(db, "SELECT DISTINCT Path FROM FILES WHERE Artist = ?1 AND Album = ?2 AND Title = ?3", -1, &stmt, NULL);
-
-    sqlite3_bind_text(stmt, 1, artist, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, album, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 3, title, -1, SQLITE_STATIC);
-
-    char *ret = NULL;
-
-    if((rc = sqlite3_step(stmt)) == SQLITE_ROW)
-        asprintf(&ret, (char *) sqlite3_column_text(stmt, 0), artist);
-
-    sqlite3_finalize(stmt);
-    return ret;
-}
-
 
 char *
 resolve_file(char *path, uint64_t levels)
@@ -102,13 +92,15 @@ resolve_file(char *path, uint64_t levels)
 	char *restore = malloc(strlen(path) + 1);
 	strcpy(restore, path);
 
-    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1");
+    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1 LIMIT 1");
+	/*
 	for(size_t i = 0; i < levels; i++) {
-		cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].name, val_at_level(path, i));
-		strcpy(path, restore);
+		for(size_t j = 0; j < data->opts->format[i].specifiers; j++) {
+			//cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].names[j], val_at_level(path, i));
+			strcpy(path, restore);
+		}
 	}
-
-	printf("%s\n", query);
+	*/
 
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
@@ -124,13 +116,15 @@ resolve_file(char *path, uint64_t levels)
 }
 
 /**
+ * TODO
  * Change all the tags from a specific file in the database. The
- * lookup is done by using the path from resolve_title().
+ * lookup is done by using the path from resolve_file().
  */
 char *
 rename_file(tags_t *old, tags_t *new)
 {
-    char *path = resolve_title(old->artist, old->album, old->title);
+    // char *path = resolve_title(old->artist, old->album, old->title);
+	char *path = "";
 
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, "UPDATE FILES SET Artist = ?1, Album = ?2, Title = ?3 WHERE Path = ?4", -1, &stmt, NULL);
