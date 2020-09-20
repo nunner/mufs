@@ -52,7 +52,6 @@ void
 get_level(mufs_sqlite_data *mufs_data, int levels, char *path)
 {
     char query[BUFSIZE];
-	char fmtstring[BUFSIZE];
     char *err;
 
 	// There's gotta be a better way than this.
@@ -62,13 +61,10 @@ get_level(mufs_sqlite_data *mufs_data, int levels, char *path)
 	// This is SO fucking cursed
 		
 	// Basically, we build the format string for the current level so that we can use printf() in sqlite
-	for(size_t i = 0, j = 0; i < data->opts->format[levels].specifiers; i++) {
-		j += snprintf(fmtstring + j, BUFSIZE - j, ", %s", data->opts->format[levels].names[i]);	
-	}
 
     int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT printf('%s' %s) FROM FILES WHERE 1=1", 
-																	data->opts->format[levels].format,
-																	fmtstring);
+																	data->opts->format[levels].select.format,
+																	data->opts->format[levels].select.specifiers);
 	
 	// Loop through all conditions.
 	for(size_t i = 0; i < levels; i++) {
@@ -87,7 +83,6 @@ char *
 resolve_file(char *path, uint64_t levels)
 {
     char query[BUFSIZE];
-	char fmtstring[BUFSIZE];
 
 	// There's gotta be a better way than this.
 	char *restore = malloc(strlen(path) + 1);
@@ -96,17 +91,11 @@ resolve_file(char *path, uint64_t levels)
     int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1");
 
 	for(size_t i = 0; i < levels; i++) {
-		for(size_t j = 0, k = 0; j < data->opts->format[i].specifiers; j++) {
-			k += snprintf(fmtstring + k, BUFSIZE - k, ", %s", data->opts->format[i].names[j]);	
-		}
-
 		cx += snprintf(query + cx, BUFSIZE - cx, " AND printf('%s' %s)='%s'", 
-																data->opts->format[i].format,
-																fmtstring,
+																data->opts->format[i].select.format,
+																data->opts->format[i].select.specifiers,
 																val_at_level(path, i));
 		strcpy(path, restore);
-
-		memset(fmtstring, 0, BUFSIZE);
 	}
 
     sqlite3_stmt *stmt;

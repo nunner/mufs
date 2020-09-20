@@ -10,7 +10,10 @@
 
 struct mufs_format {
 	char **names;
-	char *format;
+	struct {
+		char *format;
+		char *specifiers;
+	} select;
 	int specifiers;
 };
 

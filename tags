@@ -86,16 +86,17 @@ TRACK_DEFAULT	src/args.c	/^static int   TRACK_DEFAULT  = false;$/;"	v	typeref:ty
 Title	scheme.sql	/^	"Title"	TEXT NOT NULL,$/;"	E	table:FILES
 _XOPEN_SOURCE	src/indexing.c	/^#define _XOPEN_SOURCE /;"	d	file:
 __anon4fcb96ff0103	src/args.h	/^enum {$/;"	g
-__anon6bff3bad0108	src/mufs.h	/^typedef struct {$/;"	s
+__anon6bff3bad0108	src/mufs.h	/^	struct {$/;"	s	struct:mufs_format
 __anon6bff3bad0208	src/mufs.h	/^typedef struct {$/;"	s
 __anon6bff3bad0308	src/mufs.h	/^typedef struct {$/;"	s
-album	src/mufs.h	/^    char *album;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
+__anon6bff3bad0408	src/mufs.h	/^typedef struct {$/;"	s
+album	src/mufs.h	/^    char *album;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
 all	Makefile	/^all: $(TARGET) create_db$/;"	t
 arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:0
 arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:1
-artist	src/mufs.h	/^    char *artist;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
+artist	src/mufs.h	/^    char *artist;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
 begin_transaction	src/db.c	/^begin_transaction() {$/;"	f	typeref:typename:void
-buf	src/mufs.h	/^    void * buf;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:void *
+buf	src/mufs.h	/^    void * buf;$/;"	m	struct:__anon6bff3bad0408	typeref:typename:void *
 check	src/indexing.c	/^#define check(/;"	d	file:
 clean	Makefile	/^clean:$/;"	t
 commit_transaction	src/db.c	/^commit_transaction() {$/;"	f	typeref:typename:void
@@ -108,9 +109,9 @@ directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\
 directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\/mufs",$/;"	s	object:1
 file	compile_commands.json	/^  "file": "src\/mufs.c"$/;"	s	object:0
 file	compile_commands.json	/^  "file": "src\/parser.c"$/;"	s	object:1
-file_t	src/mufs.h	/^} file_t;$/;"	t	typeref:struct:__anon6bff3bad0208
-filler	src/mufs.h	/^    fuse_fill_dir_t filler;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:fuse_fill_dir_t
-format	src/mufs.h	/^	char *format;$/;"	m	struct:mufs_format	typeref:typename:char *
+file_t	src/mufs.h	/^} file_t;$/;"	t	typeref:struct:__anon6bff3bad0308
+filler	src/mufs.h	/^    fuse_fill_dir_t filler;$/;"	m	struct:__anon6bff3bad0408	typeref:typename:fuse_fill_dir_t
+format	src/mufs.h	/^		char *format;$/;"	m	struct:mufs_format::__anon6bff3bad0108	typeref:typename:char *
 format	src/mufs.h	/^	struct mufs_format *format;$/;"	m	struct:mufs_opts	typeref:struct:mufs_format *
 format_str	src/mufs.h	/^	char *format_str;$/;"	m	struct:mufs_opts	typeref:typename:char *
 get_level	src/db.c	/^get_level(mufs_sqlite_data *mufs_data, int levels, char *path)$/;"	f	typeref:typename:void
@@ -138,7 +139,7 @@ mufs_opts	src/mufs.h	/^struct mufs_opts {$/;"	s
 mufs_readdir	src/mufs.c	/^mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,$/;"	f	typeref:typename:int	file:
 mufs_readlink	src/mufs.c	/^mufs_readlink(const char *path, char *buf, size_t size)$/;"	f	typeref:typename:int	file:
 mufs_rename	src/mufs.c	/^mufs_rename(const char *from, const char *to, unsigned int flags)$/;"	f	typeref:typename:int	file:
-mufs_sqlite_data	src/mufs.h	/^} mufs_sqlite_data;$/;"	t	typeref:struct:__anon6bff3bad0308
+mufs_sqlite_data	src/mufs.h	/^} mufs_sqlite_data;$/;"	t	typeref:struct:__anon6bff3bad0408
 mufs_version	src/args.c	/^char *mufs_version    	= "0.2";$/;"	v	typeref:typename:char *
 names	src/mufs.h	/^	char **names;$/;"	m	struct:mufs_format	typeref:typename:char **
 names	src/parser.c	/^static char *names[] = {$/;"	v	typeref:typename:char * []	file:
@@ -146,17 +147,19 @@ open_conn	src/db.c	/^open_conn()$/;"	f	typeref:typename:void
 opts	src/mufs.h	/^    struct mufs_opts *opts;$/;"	m	struct:mufs_data	typeref:struct:mufs_opts *
 parse_args	src/args.c	/^parse_args(struct mufs_data *data, int *argc, char **argv[])$/;"	f	typeref:typename:void
 parse_format	src/parser.c	/^parse_format (struct mufs_opts *opts)$/;"	f	typeref:typename:void
-path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
+path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:char *
 rc	src/db.c	/^static int rc;$/;"	v	typeref:typename:int	file:
 rename_file	src/db.c	/^rename_file(tags_t *old, tags_t *new)$/;"	f	typeref:typename:char *
 resolve_file	src/db.c	/^resolve_file(char *path, uint64_t levels)$/;"	f	typeref:typename:char *
 rootdir	src/mufs.h	/^    char *rootdir;$/;"	m	struct:mufs_data	typeref:typename:char *
 run	Makefile	/^run: $(TARGET)$/;"	t
+select	src/mufs.h	/^	} select;$/;"	m	struct:mufs_format	typeref:struct:mufs_format::__anon6bff3bad0108
+specifiers	src/mufs.h	/^		char *specifiers;$/;"	m	struct:mufs_format::__anon6bff3bad0108	typeref:typename:char *
 specifiers	src/mufs.h	/^	int specifiers;$/;"	m	struct:mufs_format	typeref:typename:int
 store_file	src/indexing.c	/^store_file(const char *fpath, const struct stat *sb,$/;"	f	typeref:typename:int	file:
-tags	src/mufs.h	/^    tags_t *tags;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:tags_t *
-tags_t	src/mufs.h	/^} tags_t;$/;"	t	typeref:struct:__anon6bff3bad0108
-title	src/mufs.h	/^    char *title;$/;"	m	struct:__anon6bff3bad0108	typeref:typename:char *
+tags	src/mufs.h	/^    tags_t *tags;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:tags_t *
+tags_t	src/mufs.h	/^} tags_t;$/;"	t	typeref:struct:__anon6bff3bad0208
+title	src/mufs.h	/^    char *title;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
 track	src/mufs.h	/^    bool track;$/;"	m	struct:mufs_opts	typeref:typename:bool
 untagged	src/indexing.c	/^static char *untagged = "Untagged";$/;"	v	typeref:typename:char *	file:
 update	Makefile	/^update: clean all install$/;"	t
