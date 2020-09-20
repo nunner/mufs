@@ -87,20 +87,27 @@ char *
 resolve_file(char *path, uint64_t levels)
 {
     char query[BUFSIZE];
+	char fmtstring[BUFSIZE];
 
 	// There's gotta be a better way than this.
 	char *restore = malloc(strlen(path) + 1);
 	strcpy(restore, path);
 
-    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1 LIMIT 1");
-	/*
+    int cx = snprintf (query, BUFSIZE, "SELECT DISTINCT Path FROM FILES WHERE 1=1");
+
 	for(size_t i = 0; i < levels; i++) {
-		for(size_t j = 0; j < data->opts->format[i].specifiers; j++) {
-			//cx += snprintf(query + cx, BUFSIZE - cx, " AND %s='%s'", data->opts->format[i].names[j], val_at_level(path, i));
-			strcpy(path, restore);
+		for(size_t j = 0, k = 0; j < data->opts->format[i].specifiers; j++) {
+			k += snprintf(fmtstring + k, BUFSIZE - k, ", %s", data->opts->format[i].names[j]);	
 		}
+
+		cx += snprintf(query + cx, BUFSIZE - cx, " AND printf('%s' %s)='%s'", 
+																data->opts->format[i].format,
+																fmtstring,
+																val_at_level(path, i));
+		strcpy(path, restore);
+
+		memset(fmtstring, 0, BUFSIZE);
 	}
-	*/
 
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
