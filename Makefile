@@ -32,7 +32,7 @@ create_db:
 	mkdir -p ~/.local/share/mufs
 	cat scheme.sql | sqlite3 $(DB)
 
-install:
+install: all 
 	sudo cp $(TARGET) /usr/local/bin/$(TARGET)
 
 update: clean all install
