@@ -33,6 +33,8 @@ typedef struct {
     char *artist;
     char *title;
     char *album;
+	char *genre;
+	int track;
 } tags_t;
 
 typedef struct {

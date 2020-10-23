@@ -11,6 +11,8 @@ static char *names[] = {
 	"Artist",
 	"Album",
 	"Title",
+	"Genre",
+	"Track",
 };
 
 void
@@ -43,6 +45,12 @@ parse_format (struct mufs_opts *opts)
 					break;
 				case 't':
 					opts->format[levels].names[*specifiers] = names[2];
+					break;
+				case 'g':
+					opts->format[levels].names[*specifiers] = names[3];
+					break;
+				case 'n':
+					opts->format[levels].names[*specifiers] = names[4];
 					break;
 			}
 

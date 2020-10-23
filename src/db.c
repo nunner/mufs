@@ -147,12 +147,14 @@ void
 insert_file(file_t *file)
 {
     sqlite3_stmt *stmt;
-    sqlite3_prepare_v2(db, "insert into FILES (Path, Title, Album, Artist) values (?1, ?2, ?3, ?4)", -1, &stmt, NULL);
+    sqlite3_prepare_v2(db, "insert into FILES (Path, Title, Album, Artist, Genre, Track) values (?1, ?2, ?3, ?4, ?5, ?6)", -1, &stmt, NULL);
 
     sqlite3_bind_text(stmt, 1, file->path, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 2, file->tags->title, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 3, file->tags->album, -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 4, file->tags->artist, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 5, file->tags->genre, -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 6, file->tags->track);
 
     if((rc = sqlite3_step(stmt)) != SQLITE_DONE) {
         printf("Couldn't insert into database: %s\n", sqlite3_errmsg(db));

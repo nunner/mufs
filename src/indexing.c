@@ -50,6 +50,11 @@ get_tags(const char *fpath)
         file->tags->title = taglib_tag_title(tag);
 		check(file->tags->title);
 
+		file->tags->genre = taglib_tag_genre(tag);
+		check(file->tags->genre);
+
+		file->tags->track = taglib_tag_track(tag);
+
         taglib_file_free(tfile);
     }
 
