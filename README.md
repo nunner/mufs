@@ -16,7 +16,7 @@ mufs is a FUSE driver which allows you to mount your music collection and browse
 
 Specify using a format using the --format flag. Example: 
 ```
-mufs --format="%a/%f/%n - %t" mount root
+mufs --format="%a/%f/%n - %t" root mount
 ```
 
 # Dependencies
