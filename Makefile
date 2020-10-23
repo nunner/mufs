@@ -28,7 +28,7 @@ debug: $(TARGET)
 	./$(TARGET) -f root mount
 
 create_db:
-	rm ~/.local/share/mufs/mufs.db
+	rm -f ~/.local/share/mufs/mufs.db
 	mkdir -p ~/.local/share/mufs
 	cat scheme.sql | sqlite3 $(DB)
 

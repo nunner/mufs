@@ -21,25 +21,6 @@
 struct mufs_data *data;
 
 /*
- * Fill a tags_t object from a given path.
- */
-tags_t *
-get_tags_from_path(const char *path)
-{
-    char *fpath = NULL;
-    tags_t *tags = malloc(sizeof(tags_t));
-    asprintf(&fpath, "%s", path);
-
-    tags->artist = strtok(fpath, "/");
-    tags->album = strtok(NULL, "/");
-    tags->title = strtok(NULL, "/");
-
-	free(fpath);
-
-    return tags;
-}
-
-/*
  * Calculate at which level the given path is. This is used for determining
  * whether a file is an Artist, Album or Title.
  */
@@ -178,33 +159,14 @@ mufs_readlink(const char *path, char *buf, size_t size)
 }
 
 /*
- * In mufs, renaming and moving files changes their tags.
- * The old tags are read from the current path, the new tags
- * are read from the path where the file is moved to, using
- * get_tags_from_path(), respectively. The file is renamed using
- * the rename_file() function, defined in db.h.
+ * Due to the dynamic path generation, I've decided to remove this 
+ * feature for now, since I don't really know how to parse the tags again.
+ * I've thought about adding ZWS characters between the tags, but idk
+ * if that's really a good idea.
  */
 static int
 mufs_rename(const char *from, const char *to, unsigned int flags)
 {
-    tags_t *old = get_tags_from_path(from);
-    tags_t *new = get_tags_from_path(to);
-
-    char *path = rename_file(old, new);
-
-    TagLib_File *tfile;
-
-    if((tfile = taglib_file_new(path)) != NULL) {
-        TagLib_Tag *tag = taglib_file_tag(tfile);
-
-        taglib_tag_set_title(tag, new->title);
-        taglib_tag_set_album(tag, new->album);
-        taglib_tag_set_artist(tag, new->artist);
-
-        taglib_file_save(tfile);
-        taglib_file_free(tfile);
-    }
-
     return 0;
 }
 
