@@ -2,8 +2,8 @@
 mufs is a FUSE driver which allows you to mount your music collection and browse it by its tags.
 
 ### Features
-- change a files' tags by moving/renaming it in mufs.
-- browse your music collection without having to order the physical files.
+- Browse your music collection without having to order the physical files.
+- Create your own layout using the formatting options
 
 ### Formatting options
 |    | Formatting options |
