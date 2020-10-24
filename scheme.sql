@@ -1,9 +1,11 @@
 BEGIN TRANSACTION;
 CREATE TABLE "FILES" (
-	"Path"	TEXT NOT NULL,
-	"Title"	TEXT NOT NULL,
-	"Album"	TEXT NOT NULL,
+	"Path"		TEXT NOT NULL,
+	"Title"		TEXT NOT NULL,
+	"Album"		TEXT NOT NULL,
 	"Artist"	TEXT NOT NULL,
-	PRIMARY KEY("Path","Title","Album","Artist")
+	"Genre"		TEXT NOT NULL,
+	"Track"		INT  NOT NULL,
+	PRIMARY KEY("Path","Title","Album","Artist","Genre","Track")
 );
 COMMIT;

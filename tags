@@ -1,0 +1,166 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/a3c87ab5/
+$(TARGET)	Makefile	/^$(TARGET): $(SRC)$/;"	t
+0	compile_commands.json	/^   "gcc",$/;"	s	array:0.arguments
+0	compile_commands.json	/^   "gcc",$/;"	s	array:1.arguments
+0	compile_commands.json	/^ {$/;"	o
+1	compile_commands.json	/^   "-o",$/;"	s	array:0.arguments
+1	compile_commands.json	/^   "-o",$/;"	s	array:1.arguments
+1	compile_commands.json	/^ {$/;"	o
+10	compile_commands.json	/^   "-I\/usr\/include\/fuse3",$/;"	s	array:0.arguments
+10	compile_commands.json	/^   "-I\/usr\/include\/fuse3",$/;"	s	array:1.arguments
+11	compile_commands.json	/^   "-I\/usr\/include\/taglib",$/;"	s	array:0.arguments
+11	compile_commands.json	/^   "-I\/usr\/include\/taglib",$/;"	s	array:1.arguments
+12	compile_commands.json	/^   "src\/args.c",$/;"	s	array:0.arguments
+12	compile_commands.json	/^   "src\/args.c",$/;"	s	array:1.arguments
+13	compile_commands.json	/^   "src\/db.c",$/;"	s	array:0.arguments
+13	compile_commands.json	/^   "src\/db.c",$/;"	s	array:1.arguments
+14	compile_commands.json	/^   "src\/indexing.c",$/;"	s	array:0.arguments
+14	compile_commands.json	/^   "src\/indexing.c",$/;"	s	array:1.arguments
+15	compile_commands.json	/^   "src\/mufs.c",$/;"	s	array:0.arguments
+15	compile_commands.json	/^   "src\/mufs.c",$/;"	s	array:1.arguments
+16	compile_commands.json	/^   "-lsqlite3",$/;"	s	array:0.arguments
+16	compile_commands.json	/^   "src\/parser.c",$/;"	s	array:1.arguments
+17	compile_commands.json	/^   "-lm",$/;"	s	array:0.arguments
+17	compile_commands.json	/^   "-lsqlite3",$/;"	s	array:1.arguments
+18	compile_commands.json	/^   "-lm",$/;"	s	array:1.arguments
+18	compile_commands.json	/^   "-lz",$/;"	s	array:0.arguments
+19	compile_commands.json	/^   "-lfuse3",$/;"	s	array:0.arguments
+19	compile_commands.json	/^   "-lz",$/;"	s	array:1.arguments
+2	compile_commands.json	/^   "mufs",$/;"	s	array:0.arguments
+2	compile_commands.json	/^   "mufs",$/;"	s	array:1.arguments
+20	compile_commands.json	/^   "-lfuse3",$/;"	s	array:1.arguments
+20	compile_commands.json	/^   "-lpthread",$/;"	s	array:0.arguments
+21	compile_commands.json	/^   "-lpthread",$/;"	s	array:1.arguments
+21	compile_commands.json	/^   "-ltag_c",$/;"	s	array:0.arguments
+22	compile_commands.json	/^   "-ltag"$/;"	s	array:0.arguments
+22	compile_commands.json	/^   "-ltag_c",$/;"	s	array:1.arguments
+23	compile_commands.json	/^   "-ltag"$/;"	s	array:1.arguments
+3	compile_commands.json	/^   "-g",$/;"	s	array:1.arguments
+3	compile_commands.json	/^   "-lstdc++",$/;"	s	array:0.arguments
+4	compile_commands.json	/^   "-Wall",$/;"	s	array:1.arguments
+4	compile_commands.json	/^   "-g",$/;"	s	array:0.arguments
+5	compile_commands.json	/^   "-Wall",$/;"	s	array:0.arguments
+5	compile_commands.json	/^   "-Werror",$/;"	s	array:1.arguments
+6	compile_commands.json	/^   "-D_FILE_OFFSET_BITS=64",$/;"	s	array:0.arguments
+6	compile_commands.json	/^   "-O3",$/;"	s	array:1.arguments
+7	compile_commands.json	/^   "-Wdiscarded-qualifiers",$/;"	s	array:0.arguments
+7	compile_commands.json	/^   "-fsanitize=undefined",$/;"	s	array:1.arguments
+8	compile_commands.json	/^   "-D",$/;"	s	array:0.arguments
+8	compile_commands.json	/^   "-D",$/;"	s	array:1.arguments
+9	compile_commands.json	/^   "_GNU_SOURCE",$/;"	s	array:0.arguments
+9	compile_commands.json	/^   "_GNU_SOURCE",$/;"	s	array:1.arguments
+About	README.md	/^# About$/;"	c
+Album	scheme.sql	/^	"Album"	TEXT NOT NULL,$/;"	E	table:FILES
+Artist	scheme.sql	/^	"Artist"	TEXT NOT NULL,$/;"	E	table:FILES
+BUFSIZE	src/mufs.h	/^#define BUFSIZE /;"	d
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-g -Wall -O0 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address $/;"	m
+DB	Makefile	/^DB=~\/.local\/share\/mufs\/mufs.db$/;"	m
+Dependencies	README.md	/^# Dependencies$/;"	c
+FD_NUM	src/indexing.c	/^#define FD_NUM /;"	d	file:
+FILES	scheme.sql	/^CREATE TABLE "FILES" ($/;"	t
+FMTSIZE	src/parser.c	/^#define FMTSIZE /;"	d	file:
+FORMAT_DEFAULT	src/args.c	/^static char *FORMAT_DEFAULT = "%a\/%f - %t";$/;"	v	typeref:typename:char *	file:
+FUSE_USE_VERSION	src/args.c	/^#define FUSE_USE_VERSION /;"	d	file:
+FUSE_USE_VERSION	src/mufs.c	/^#define FUSE_USE_VERSION /;"	d	file:
+FUSE_USE_VERSION	src/mufs.h	/^#define FUSE_USE_VERSION /;"	d
+Features	README.md	/^### Features$/;"	S
+Formatting options	README.md	/^### Formatting options$/;"	S
+Installation	README.md	/^# Installation$/;"	c
+LDLIBS	Makefile	/^LDLIBS = -lsqlite3$/;"	m
+MUFS_HELP	src/args.h	/^    MUFS_HELP   = 0x100,$/;"	e	enum:__anon4fcb96ff0103
+MUFS_OPT	src/args.c	/^#define MUFS_OPT(/;"	d	file:
+MUFS_TARGET	src/args.h	/^    MUFS_TARGET = 0x102$/;"	e	enum:__anon4fcb96ff0103
+MUFS_VERSION	src/args.h	/^    MUFS_VERSION= 0x101,$/;"	e	enum:__anon4fcb96ff0103
+Path	scheme.sql	/^	"Path"	TEXT NOT NULL,$/;"	E	table:FILES
+SRC	Makefile	/^SRC=$(wildcard src\/*.c)$/;"	m
+TARGET	Makefile	/^TARGET=mufs$/;"	m
+TRACK_DEFAULT	src/args.c	/^static int   TRACK_DEFAULT  = false;$/;"	v	typeref:typename:int	file:
+Title	scheme.sql	/^	"Title"	TEXT NOT NULL,$/;"	E	table:FILES
+_XOPEN_SOURCE	src/indexing.c	/^#define _XOPEN_SOURCE /;"	d	file:
+__anon4fcb96ff0103	src/args.h	/^enum {$/;"	g
+__anon6bff3bad0108	src/mufs.h	/^	struct {$/;"	s	struct:mufs_format
+__anon6bff3bad0208	src/mufs.h	/^typedef struct {$/;"	s
+__anon6bff3bad0308	src/mufs.h	/^typedef struct {$/;"	s
+__anon6bff3bad0408	src/mufs.h	/^typedef struct {$/;"	s
+album	src/mufs.h	/^    char *album;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
+all	Makefile	/^all: $(TARGET) create_db$/;"	t
+arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:0
+arguments	compile_commands.json	/^  "arguments": [$/;"	a	object:1
+artist	src/mufs.h	/^    char *artist;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
+begin_transaction	src/db.c	/^begin_transaction() {$/;"	f	typeref:typename:void
+buf	src/mufs.h	/^    void * buf;$/;"	m	struct:__anon6bff3bad0408	typeref:typename:void *
+check	src/indexing.c	/^#define check(/;"	d	file:
+clean	Makefile	/^clean:$/;"	t
+commit_transaction	src/db.c	/^commit_transaction() {$/;"	f	typeref:typename:void
+create_db	Makefile	/^create_db:$/;"	t
+data	src/mufs.c	/^struct mufs_data *data;$/;"	v	typeref:struct:mufs_data *
+db	src/db.c	/^static sqlite3 *db;$/;"	v	typeref:typename:sqlite3 *	file:
+db_file	src/db.c	/^const char *db_file = "~\/.local\/share\/mufs\/mufs.db";$/;"	v	typeref:typename:const char *
+debug	Makefile	/^debug: $(TARGET)$/;"	t
+directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\/mufs",$/;"	s	object:0
+directory	compile_commands.json	/^  "directory": "\/home\/nun\/Programming\/git\/mufs",$/;"	s	object:1
+file	compile_commands.json	/^  "file": "src\/mufs.c"$/;"	s	object:0
+file	compile_commands.json	/^  "file": "src\/parser.c"$/;"	s	object:1
+file_t	src/mufs.h	/^} file_t;$/;"	t	typeref:struct:__anon6bff3bad0308
+filler	src/mufs.h	/^    fuse_fill_dir_t filler;$/;"	m	struct:__anon6bff3bad0408	typeref:typename:fuse_fill_dir_t
+format	src/mufs.h	/^		char *format;$/;"	m	struct:mufs_format::__anon6bff3bad0108	typeref:typename:char *
+format	src/mufs.h	/^	struct mufs_format *format;$/;"	m	struct:mufs_opts	typeref:struct:mufs_format *
+format_str	src/mufs.h	/^	char *format_str;$/;"	m	struct:mufs_opts	typeref:typename:char *
+get_level	src/db.c	/^get_level(mufs_sqlite_data *mufs_data, int levels, char *path)$/;"	f	typeref:typename:void
+get_tags	src/indexing.c	/^get_tags(const char *fpath)$/;"	f	typeref:typename:file_t *
+get_tags_from_path	src/mufs.c	/^get_tags_from_path(const char *path)$/;"	f	typeref:typename:tags_t *
+help	src/args.c	/^help()$/;"	f	typeref:typename:void	file:
+index_files	src/indexing.c	/^index_files(char *path)$/;"	f	typeref:typename:void
+insert_file	src/db.c	/^insert_file(file_t *file)$/;"	f	typeref:typename:void
+install	Makefile	/^install:$/;"	t
+level	src/mufs.c	/^level(const char *path)$/;"	f	typeref:typename:int
+levels	src/mufs.h	/^	uint64_t levels;$/;"	m	struct:mufs_opts	typeref:typename:uint64_t
+main	src/mufs.c	/^main(int argc, char* argv[])$/;"	f	typeref:typename:int
+mufs_data	src/mufs.h	/^struct mufs_data {$/;"	s
+mufs_description	src/args.c	/^char mufs_description[] = "A FUSE system based on music tags.";$/;"	v	typeref:typename:char[]
+mufs_fill_callback	src/mufs.c	/^mufs_fill_callback(void* cdata, int argc, char** argv, char** azColName)$/;"	f	typeref:typename:int
+mufs_format	src/mufs.h	/^struct mufs_format {$/;"	s
+mufs_getattr	src/mufs.c	/^mufs_getattr (const char *path, struct stat *stbuf,$/;"	f	typeref:typename:int	file:
+mufs_init	src/mufs.c	/^mufs_init(struct fuse_conn_info *conn,$/;"	f	typeref:typename:void *	file:
+mufs_maintainer	src/args.c	/^char *mufs_maintainer 	= "leo@leonunner.com";$/;"	v	typeref:typename:char *
+mufs_opendir	src/mufs.c	/^mufs_opendir(const char *path, struct fuse_file_info *info)$/;"	f	typeref:typename:int	file:
+mufs_oper	src/mufs.c	/^static struct fuse_operations mufs_oper = {$/;"	v	typeref:struct:fuse_operations	file:
+mufs_opt_proc	src/args.c	/^mufs_opt_proc(void *data, const char *arg, int key, struct fuse_args *outargs)$/;"	f	typeref:typename:int	file:
+mufs_opts	src/args.c	/^static struct fuse_opt mufs_opts[] = {$/;"	v	typeref:struct:fuse_opt[]	file:
+mufs_opts	src/mufs.h	/^struct mufs_opts {$/;"	s
+mufs_readdir	src/mufs.c	/^mufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,$/;"	f	typeref:typename:int	file:
+mufs_readlink	src/mufs.c	/^mufs_readlink(const char *path, char *buf, size_t size)$/;"	f	typeref:typename:int	file:
+mufs_rename	src/mufs.c	/^mufs_rename(const char *from, const char *to, unsigned int flags)$/;"	f	typeref:typename:int	file:
+mufs_sqlite_data	src/mufs.h	/^} mufs_sqlite_data;$/;"	t	typeref:struct:__anon6bff3bad0408
+mufs_version	src/args.c	/^char *mufs_version    	= "0.2";$/;"	v	typeref:typename:char *
+names	src/mufs.h	/^	char **names;$/;"	m	struct:mufs_format	typeref:typename:char **
+names	src/parser.c	/^static char *names[] = {$/;"	v	typeref:typename:char * []	file:
+open_conn	src/db.c	/^open_conn()$/;"	f	typeref:typename:void
+opts	src/mufs.h	/^    struct mufs_opts *opts;$/;"	m	struct:mufs_data	typeref:struct:mufs_opts *
+parse_args	src/args.c	/^parse_args(struct mufs_data *data, int *argc, char **argv[])$/;"	f	typeref:typename:void
+parse_format	src/parser.c	/^parse_format (struct mufs_opts *opts)$/;"	f	typeref:typename:void
+path	src/mufs.h	/^    char *path;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:char *
+rc	src/db.c	/^static int rc;$/;"	v	typeref:typename:int	file:
+rename_file	src/db.c	/^rename_file(tags_t *old, tags_t *new)$/;"	f	typeref:typename:char *
+resolve_file	src/db.c	/^resolve_file(char *path, uint64_t levels)$/;"	f	typeref:typename:char *
+rootdir	src/mufs.h	/^    char *rootdir;$/;"	m	struct:mufs_data	typeref:typename:char *
+run	Makefile	/^run: $(TARGET)$/;"	t
+select	src/mufs.h	/^	} select;$/;"	m	struct:mufs_format	typeref:struct:mufs_format::__anon6bff3bad0108
+specifiers	src/mufs.h	/^		char *specifiers;$/;"	m	struct:mufs_format::__anon6bff3bad0108	typeref:typename:char *
+specifiers	src/mufs.h	/^	int specifiers;$/;"	m	struct:mufs_format	typeref:typename:int
+store_file	src/indexing.c	/^store_file(const char *fpath, const struct stat *sb,$/;"	f	typeref:typename:int	file:
+tags	src/mufs.h	/^    tags_t *tags;$/;"	m	struct:__anon6bff3bad0308	typeref:typename:tags_t *
+tags_t	src/mufs.h	/^} tags_t;$/;"	t	typeref:struct:__anon6bff3bad0208
+title	src/mufs.h	/^    char *title;$/;"	m	struct:__anon6bff3bad0208	typeref:typename:char *
+track	src/mufs.h	/^    bool track;$/;"	m	struct:mufs_opts	typeref:typename:bool
+untagged	src/indexing.c	/^static char *untagged = "Untagged";$/;"	v	typeref:typename:char *	file:
+update	Makefile	/^update: clean all install$/;"	t
+val_at_level	src/db.c	/^val_at_level(char *path, int level)$/;"	f	typeref:typename:char *

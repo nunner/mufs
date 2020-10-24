@@ -1,6 +1,3 @@
-//
-// Created by nun on 2/9/20.
-//
 #define _XOPEN_SOURCE 500
 
 #define FD_NUM 15
@@ -19,7 +16,13 @@
 
 static char *untagged = "Untagged";
 
-/**
+#define check(tag) {\
+        if (strlen(tag) == 0) \
+            tag = untagged; \
+}
+
+
+/*
  * Read the tags from a physical file. If the file is
  * invalid, they are discarded. If single tags are not set,
  * they are replaced with "Untagged".
@@ -27,7 +30,7 @@ static char *untagged = "Untagged";
 file_t *
 get_tags(const char *fpath)
 {
-    file_t *file = (file_t *) calloc(1, sizeof(file_t));
+    file_t *file = calloc(1, sizeof(file_t));
     file->tags = calloc(1, sizeof(tags_t));
 
     TagLib_File *tfile;
@@ -35,19 +38,22 @@ get_tags(const char *fpath)
     if((tfile = taglib_file_new(fpath)) != NULL) {
         TagLib_Tag *tag = taglib_file_tag(tfile);
 
-        file->path = fpath;
+		file->path = malloc(strlen(fpath) + 1);
+		strcpy(file->path, fpath);
 
         file->tags->artist = taglib_tag_artist(tag);
-        if (strlen(file->tags->artist) == 0)
-            file->tags->artist = untagged;
+		check(file->tags->artist);
 
         file->tags->album =  taglib_tag_album(tag);
-        if (strlen(file->tags->album) == 0)
-            file->tags->album = untagged;
+		check(file->tags->album);
 
         file->tags->title = taglib_tag_title(tag);
-        if (strlen(file->tags->title) == 0)
-            file->tags->artist = basename(fpath);
+		check(file->tags->title);
+
+		file->tags->genre = taglib_tag_genre(tag);
+		check(file->tags->genre);
+
+		file->tags->track = taglib_tag_track(tag);
 
         taglib_file_free(tfile);
     }
@@ -76,7 +82,7 @@ store_file(const char *fpath, const struct stat *sb,
  * the tags for each single one.
  */
 void
-index_files(const char *path)
+index_files(char *path)
 {
     int ret = 0;
     begin_transaction();

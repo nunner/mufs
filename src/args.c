@@ -1,7 +1,3 @@
-//
-// Created by nun on 2/16/20.
-//
-
 #define FUSE_USE_VERSION 31
 
 #include <fuse.h>
@@ -16,15 +12,15 @@
 
 // https://github.com/libfuse/libfuse/wiki/Option-Parsing
 
-char *mufs_version    = "0.1";
-char *mufs_maintainer = "leo@leonunner.com";
+char *mufs_version    	= "0.2";
+char *mufs_maintainer 	= "leo@leonunner.com";
 char mufs_description[] = "A FUSE system based on music tags.";
 
 /*
  * Default values for each option.
  */
-static int   _TRACK_DEFAULT  = false;
-static char *_FORMAT_DEFAULT = "%a/%f/%t";
+static int   TRACK_DEFAULT  = false;
+static char *FORMAT_DEFAULT = "%a/%f/%t";
 
 static struct fuse_opt mufs_opts[] = {
         MUFS_OPT("--track", track, 1),
@@ -67,7 +63,8 @@ void
 parse_args(struct mufs_data *data, int *argc, char **argv[])
 {
     // Default values
-    data->opts->track = _TRACK_DEFAULT;
+    data->opts->track = TRACK_DEFAULT;
+    data->opts->format_str = FORMAT_DEFAULT;
 
     struct fuse_args args = FUSE_ARGS_INIT(*argc, *argv);
     fuse_opt_parse(&args, data->opts, mufs_opts, mufs_opt_proc);
@@ -77,8 +74,6 @@ parse_args(struct mufs_data *data, int *argc, char **argv[])
      * fuse_opt_parse, it will try to free the default parameter,
      * which will segfault as it is not allocated through malloc.
      */
-    if(!data->opts->format)
-        data->opts->format = _FORMAT_DEFAULT;
 
     if(*argc < 3) {
         printf("Please specify at least 2 parameters.\n\n");

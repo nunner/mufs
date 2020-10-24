@@ -1,9 +1,4 @@
-//
-// Created by nun on 2/8/20.
-//
-
-#ifndef FUSE_TEST_MUFS_H
-#define FUSE_TEST_MUFS_H
+#pragma once
 
 #define FUSE_USE_VERSION 31
 
@@ -11,9 +6,22 @@
 #include <sqlite3.h>
 #include <stdbool.h>
 
+#define BUFSIZE 1000
+
+struct mufs_format {
+	char **names;
+	struct {
+		char *format;
+		char *specifiers;
+	} select;
+	int specifiers;
+};
+
 struct mufs_opts {
     bool track;
-    char *format;
+	char *format_str;
+	struct mufs_format *format;
+	uint64_t levels;
 };
 
 struct mufs_data {
@@ -25,6 +33,8 @@ typedef struct {
     char *artist;
     char *title;
     char *album;
+	char *genre;
+	int track;
 } tags_t;
 
 typedef struct {
@@ -32,7 +42,7 @@ typedef struct {
     tags_t *tags;
 } file_t;
 
-/**
+/*
  * This is a hack, but it works. When calling the SQLITE
  * SELECT, we can optionally pass our own data. It only works
  * through callbacks, so when filling the directory, we have to pass
@@ -49,5 +59,3 @@ mufs_fill_callback(void* data, int argc, char** argv, char** azColName);
 
 char *
 translate_path(const char *path);
-
-#endif //FUSE_TEST_MUFS_H

@@ -7,7 +7,7 @@ LDLIBS += $(shell pkg-config taglib_c --libs)
 LDFLAGS += $(shell pkg-config fuse3 --cflags)
 LDFLAGS += $(shell pkg-config taglib_c --cflags)
 
-CFLAGS=-lstdc++ -g -Wall -D_FILE_OFFSET_BITS=64 -Wdiscarded-qualifiers -D _GNU_SOURCE
+CFLAGS=-g -Wall -O0 -fsanitize=undefined -D _GNU_SOURCE #-fsanitize=address 
 CC=gcc
 
 SRC=$(wildcard src/*.c)
@@ -17,6 +17,9 @@ DB=~/.local/share/mufs/mufs.db
 
 all: $(TARGET) create_db
 
+run: $(TARGET)
+	./$(TARGET) root mount
+
 $(TARGET): $(SRC)
 	$(CC) -o $(TARGET) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS)
 
@@ -25,10 +28,11 @@ debug: $(TARGET)
 	./$(TARGET) -f root mount
 
 create_db:
+	rm -f ~/.local/share/mufs/mufs.db
 	mkdir -p ~/.local/share/mufs
 	cat scheme.sql | sqlite3 $(DB)
 
-install:
+install: all 
 	sudo cp $(TARGET) /usr/local/bin/$(TARGET)
 
 update: clean all install

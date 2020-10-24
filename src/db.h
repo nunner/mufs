@@ -1,9 +1,4 @@
-//
-// Created by nun on 2/9/20.
-//
-
-#ifndef MUFS_DB_H
-#define MUFS_DB_H
+#pragma once
 
 #include "mufs.h"
 
@@ -14,16 +9,13 @@ void
 insert_file(file_t *file);
 
 void
-get_artists(mufs_sqlite_data *mufs_data);
-
-void
-get_albums(mufs_sqlite_data *mufs_data, char *artist);
-
-void
-get_titles(mufs_sqlite_data *mufs_data, char *artist, char *album);
+get_level(mufs_sqlite_data *mufs_data, int levels, char *path);
 
 char *
 resolve_title(char *artist, char *album, char *title);
+
+char *
+resolve_file(char *path, uint64_t levels);
 
 char *
 rename_file(tags_t *old, tags_t *new);
@@ -33,5 +25,3 @@ begin_transaction();
 
 void
 commit_transaction();
-
-#endif //MUFS_DB_H
